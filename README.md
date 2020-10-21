@@ -1,2 +1,8 @@
 # Iteam-DR-TF
-I Team disaster recovery environment 
+I Team Disaster Recovery Environment 
+
+# Get Started Instructions
+
+
+# Terraform Scripts
+
