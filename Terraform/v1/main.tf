@@ -5,3 +5,9 @@ provider "oci" {
   private_key_path = var.private_key_path
   region = var.region
 }
+
+module "networks" {
+  source = "./networks"
+  main_compartment = var.main_compartment
+  provisioned_by = var.provisioned_by
+}
