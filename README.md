@@ -12,7 +12,8 @@ echo 'tenancy_ocid = ""
 user_ocid = ""
 fingerprint = ""
 private_key_path = ""
-region = ""' > terraform.tfvars
+region = ""
+provisioned_by = ""' > terraform.tfvars
 ```
 ### Terraform Lifecycle
 ```
