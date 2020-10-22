@@ -20,6 +20,7 @@ module main_vcn {
   vcn_display_name = "proactive-dr-vcn-20201022"
   vcn_dns_label = "pdrmainvcn"
   provisioned_by = var.provisioned_by
+  
   defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
   freeform_tags = {"pdr-poc": "networks-vcn-main"}
 }
@@ -34,4 +35,18 @@ module regional_subnet_a {
   provisioned_by = var.provisioned_by
   defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
   freeform_tags = {"pdr-poc": "networks-subnet-a"}
+}
+
+module instance_a {
+  source = "./modules/instances"
+  compartment_id = module.root_compartment.id
+  subnet_id = module.regional_subnet_a.id
+  instance_shape = "VM.Standard2.1"
+  instance_name = "proactive-dr-instance-20201022"
+  source_image = local.linux_latest
+  metadata = {
+    ssh_authorized_keys = file(var.public_key_location)
+  }
+  defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
+  freeform_tags = {"pdr-poc": "computes-instance-a"}
 }

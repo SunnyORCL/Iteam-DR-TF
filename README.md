@@ -14,6 +14,7 @@ fingerprint = ""
 private_key_path = ""
 region = ""
 provisioned_by = ""
+public_key_location = ""
 starting_parent_compartment = ""' > terraform.tfvars
 ```
 ### Terraform Lifecycle
