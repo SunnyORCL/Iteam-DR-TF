@@ -1,4 +1,4 @@
-resource "oci_core_vcn" "dev_vcn_proactive" {
+resource "oci_core_vcn" "proactive_dr_vcn" {
   #Required
   cidr_block = var.vcn_cidr
   compartment_id = var.main_compartment
