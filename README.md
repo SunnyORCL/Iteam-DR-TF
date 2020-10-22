@@ -13,7 +13,8 @@ user_ocid = ""
 fingerprint = ""
 private_key_path = ""
 region = ""
-provisioned_by = ""' > terraform.tfvars
+provisioned_by = ""
+starting_parent_compartment = ""' > terraform.tfvars
 ```
 ### Terraform Lifecycle
 ```

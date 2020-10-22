@@ -8,7 +8,7 @@ provider "oci" {
 
 module root_compartment {
   source = "./modules/compartments"
-  compartment_id = "ocid1.compartment.oc1..aaaaaaaapyzngc24yswkwbn6443cmhfonlprcwxejigqzvo3mzksqzmemila"
+  compartment_id = var.starting_parent_compartment
   compartment_name = "MarkSmith"
   compartment_description = "MarkSmith"
 }
@@ -20,7 +20,7 @@ module main_vcn {
   vcn_display_name = "proactive-dr-vcn-20201022"
   vcn_dns_label = "pdrmainvcn"
   provisioned_by = var.provisioned_by
-  defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": "norman.japheth.aberin@oracle.com"}
+  defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
   freeform_tags = {"pdr-poc": "networks-vcn-main"}
 }
 
@@ -32,6 +32,6 @@ module regional_subnet_a {
   subnet_display_name = "proactive-dr-subnet-20201022"
   subnet_dns_label = "pdrsubneta"
   provisioned_by = var.provisioned_by
-  defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": "norman.japheth.aberin@oracle.com"}
+  defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
   freeform_tags = {"pdr-poc": "networks-subnet-a"}
 }
