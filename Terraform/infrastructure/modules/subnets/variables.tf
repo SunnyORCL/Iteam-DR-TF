@@ -28,6 +28,10 @@ variable "subnet_prohibit_public_ip_on_vnic" {
     default = false
 }
 
+variable "security_list_ids" {
+    default = []
+}
+
 /* Shared Definitions */
 variable "defined_tags" {
     type = map

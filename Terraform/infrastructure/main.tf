@@ -25,6 +25,35 @@ module main_vcn {
   freeform_tags = {"pdr-poc": "networks-vcn-main"}
 }
 
+module main_vcn_internet_gateway {
+  source = "./modules/network_resources/igw"
+  compartment_id = module.root_compartment.id
+  parent_vcn_id = module.main_vcn.id
+  defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
+  freeform_tags = {"pdr-poc": "networks-vcn-main-igw"}
+}
+
+module main_vcn_security_list {
+  source = "./modules/network_resources/security_list"
+  compartment_id = module.root_compartment.id
+  parent_vcn_id = module.main_vcn.id
+  egress_rules = [{ protocol : "all", dst: "0.0.0.0/0"}]
+  ingress_rules = [{ protocol : "tcp", ports : ["80"], src: "0.0.0.0/0", description: "Allow HTTP Connections"}, 
+  { protocol : "tcp", ports : ["22"], src: "0.0.0.0/0"}]
+  defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
+  freeform_tags = {"pdr-poc": "networks-vcn-main-sl"}
+}
+
+module main_vcn_internet_gateway_route_table {
+  source = "./modules/network_resources/route_table"
+  compartment_id = module.root_compartment.id
+  parent_vcn_id = module.main_vcn.id
+  internet_gateway_id = module.main_vcn_internet_gateway.id
+  route_table_route_rules_destination = "0.0.0.0/0"
+  defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
+  freeform_tags = {"pdr-poc": "networks-vcn-main-rt"}
+}
+
 module regional_subnet_a {
   source ="./modules/subnets"
   subnet_cidr_block = "10.0.1.0/24"
@@ -33,6 +62,7 @@ module regional_subnet_a {
   subnet_display_name = "proactive-dr-subnet-20201022"
   subnet_dns_label = "pdrsubneta"
   provisioned_by = var.provisioned_by
+  security_list_ids = [module.main_vcn_security_list.id]
   defined_tags = {"SE_Details.Resource_Purpose": "PoC", "SE_Details.SE_Email": var.provisioned_by}
   freeform_tags = {"pdr-poc": "networks-subnet-a"}
 }
