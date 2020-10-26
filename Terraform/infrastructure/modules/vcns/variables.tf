@@ -1,5 +1,4 @@
 variable "compartment_id" {}
-variable "provisioned_by" {}
 
 /* VCN Definition */
 variable "vcn_cidr" {

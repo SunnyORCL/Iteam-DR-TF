@@ -6,7 +6,6 @@ variable  "region" {}
 
 variable  "provisioned_by" {}
 variable  "starting_parent_compartment" {}
-variable  "public_key_location" {}
 
 locals {
   linux_latest = data.oci_core_images.linux_images.images[0].id

@@ -11,4 +11,5 @@ resource "oci_core_subnet" "subnet" {
     freeform_tags = var.freeform_tags
     prohibit_public_ip_on_vnic = var.subnet_prohibit_public_ip_on_vnic
     security_list_ids = var.security_list_ids
+    route_table_id = var.route_table_id
 }

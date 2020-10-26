@@ -1,5 +1,4 @@
 variable "compartment_container_id" {}
-variable "provisioned_by" {}
 variable "vcn_container_id" {}
 
 /* Subnet A Definition */
@@ -30,6 +29,10 @@ variable "subnet_prohibit_public_ip_on_vnic" {
 
 variable "security_list_ids" {
     default = []
+}
+
+variable "route_table_id" {
+    default = ""
 }
 
 /* Shared Definitions */
