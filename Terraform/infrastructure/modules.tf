@@ -54,7 +54,6 @@ module instance_a {
   compartment_id = module.root_compartment.id
   subnet_id = module.regional_subnet.id
   instance_shape = "VM.Standard.E2.1.Micro"
-  instance_name = "proactive-dr-instance-20201026"
   source_image = local.linux_latest
   metadata = {
     ssh_authorized_keys = file("~/.ssh/ssh-test/id_rsa.pub")
