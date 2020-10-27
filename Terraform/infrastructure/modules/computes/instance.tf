@@ -3,6 +3,8 @@ resource "oci_core_instance" "instance" {
     availability_domain = local.instance_availability_domain[var.ad]
     compartment_id = var.compartment_id
     shape = var.instance_shape
+
+    # Optional
     metadata = var.metadata
     fault_domain = var.fd_list[var.fd_number]
     display_name = var.instance_name

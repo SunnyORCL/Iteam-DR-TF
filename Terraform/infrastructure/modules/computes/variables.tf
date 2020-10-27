@@ -1,13 +1,15 @@
 variable "compartment_id" {}
 variable "subnet_id" {}
 variable "instance_shape" {}
-variable "instance_name" {}
 variable "metadata" {}
 variable "source_image" {}
-variable "defined_tags" {}
-variable "freeform_tags" {}
+
 variable "vnic_name" {
     default = ""
+}
+
+variable "instance_name" { 
+    default = "" 
 }
 
 variable "preserve_boot_volume" {
@@ -46,3 +48,6 @@ locals  {
 
     vnic_name = var.vnic_name == "" ? "${var.instance_name}_vnic" : var.vnic_name
 }
+
+variable defined_tags { default = {} }
+variable freeform_tags { default = {} }

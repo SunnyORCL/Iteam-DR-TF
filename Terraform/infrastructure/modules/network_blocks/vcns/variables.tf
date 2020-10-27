@@ -16,12 +16,5 @@ variable "vcn_display_name" {
     default = ""
 }
 
-/* Shared Definitions */
-variable "defined_tags" {
-    type = map
-    default = {}
-}
-variable "freeform_tags" {
-    type = map
-    default = {}
-}
+variable defined_tags { default = {} }
+variable freeform_tags { default = {} }

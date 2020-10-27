@@ -1,11 +1,9 @@
-variable "compartment_id" {}
-variable "parent_vcn_id" {}
-variable "defined_tags" {}
-variable "freeform_tags" {}
-variable "egress_rules" {}
-variable "ingress_rules" {}
+variable compartment_id {}
+variable parent_vcn_id {}
+variable egress_rules {}
+variable ingress_rules {}
 
-variable "display_name" {
+variable display_name {
     default = ""
 }
 
@@ -17,3 +15,6 @@ locals {
     all  = "all"
   }
 }
+
+variable defined_tags { default = {} }
+variable freeform_tags { default = {} }
