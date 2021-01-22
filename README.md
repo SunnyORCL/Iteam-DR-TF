@@ -1,28 +1,17 @@
-# Iteam-DR-TF
-I Team Disaster Recovery Environment 
+# Disaster Recovery on OCI
 
-# Getting Started
-
-
-## Setup after git clone
-Run the following commands to create a terraform .tfvars `right after git clone`
+**./docs** - Documentation on enabling and planning for Disaster Recovery
 ```
-cd Terraform/v1 &&
-echo 'tenancy_ocid = ""
-user_ocid = ""
-fingerprint = ""
-private_key_path = ""
-region = ""
-starting_parent_compartment = ""' > terraform.tfvars
+./docs.md
+
+/discovery/
+    - orm.md
+/replicating/
+    - replicating-compute.md
+    - replicating-database.md
+    - replicating-filestorage.md
+    - replicating-networking.md
+    - replicating-volume.md
 ```
 
-## About `terraform.tfvars`
-The `.tfvars` file is used to define where this solution will be running. The user whose user_ocid is included in the `.tfvars` must be in a group that has the right policies to create OCI objects.
-
-
-## Terraform Lifecycle
-```
-terraform init
-terraform plan
-terraform apply
-```
+**./Terraform** - Terraform (Infrastructure as Code) code
