@@ -69,7 +69,7 @@ variable user_id { default =  "ocid1.user.oc1..aaaaaaaa5in22b5bvkncp373g2mkhi6vh
 
 ### AVAILABILITY_DOMAIN.TF
 
-Update data source availability domain:
+Update data source availability domain
 ```
 data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1
 ```
@@ -81,7 +81,7 @@ Update resource oci_core_subnet
 cidr_block = "<STANDBY REGION'S SUBNET CIDR>"
 ```
 
-comment out the resource type oci_core_private_ip export_ocid1-dbnode-oc1...
+Comment out the resource type **oci_core_private_ip export_ocid1-dbnode-oc1...**
 
 Update resource oci_core_vcn
 ```
@@ -129,7 +129,7 @@ resource "oci_core_drg_attachment" "primary_region_drg_attachment" {
 }
 ```
 
-Create Repote Peering Connection
+Create Remote Peering Connection
 ```
 resource "oci_core_remote_peering_connection" "dataguard_primary_rpc" {
     provider = oci.<PRIMARY REGION ALIAS NAME FROM PROVIDER FILE>
