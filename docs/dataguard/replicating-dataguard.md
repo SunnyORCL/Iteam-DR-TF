@@ -16,19 +16,19 @@ Primary Region contains a DB System and a VCN with a Security List to allow comm
     - Compartment OCID
 
 - Primary Region
-    - Region Name           = eu-amsterdam-1
-    - VCN OCID              = ocid1.vcn.oc1.eu-amsterdam-1.amaaaaaantxkdlyaukqilsxaw4ctpnxztd45aafdsaq7iveithcthcf2dksa
-    - VCN IP                = 10.0.0.0/16
-    - Subnet IP             = 10.0.0.0/24
-    - Database ocid         = ocid1.database.oc1.eu-amsterdam-1.abqw2ljroywchm2gjchk2mmftowjyavjd6wh4o4uat4772br6gfy2hqve7pq         
+    - Region Name (ex: eu-amsterdam-1)
+    - VCN OCID              
+    - VCN IP                
+    - Subnet IP             
+    - Database OCID          
 
 ### New Variables
 
 - Select Standby Region     
-    - Standby Region Name   = uk-london-1
+    - Standby Region Name 
 - Standby Region Networking
-    - New VCN CIDR (has to be non-overlapping to Primary Region VCN)    = 10.1.0.0/16
-    - New Subnet CIDR                                                   = 10.1.0.0/24
+    - New VCN CIDR (Note: has to be non-overlapping to Primary Region VCN to allow for Peering)
+    - New Subnet CIDR                                                  
 
 ## Changes to make to .tf files
 
