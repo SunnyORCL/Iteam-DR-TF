@@ -14,7 +14,6 @@ Primary Region contains a DB System and a VCN with a Security List to allow comm
     - Tenancy OCID
     - User OCID
     - Compartment OCID
-
 - Primary Region
     - Region Name (ex: eu-amsterdam-1)
     - VCN OCID              
