@@ -90,7 +90,12 @@ Update resource oci_core_subnet from Primary Region's Subnet CIDR to Standby Reg
 cidr_block = "<STANDBY REGION'S SUBNET CIDR>"
 ```
 
-Comment out the resource type **oci_core_private_ip export_ocid1-dbnode-oc1...**
+Comment out or Remove the Database Node resource type. This is automatically exported by OCI but a new Database Node will be created when the DB System is created. 
+```
+resource oci_core_private_ip ... {
+	...
+}
+```
 
 Update resource oci_core_vcn from Primary Region's VCN CIDR to Standby Region's VCN CIDR.
 ```
