@@ -112,3 +112,15 @@ resource "oci_file_storage_mount_target" "dr_mount_target" {
 ### Create the Export for FSS
 ```
 ```
+
+### DATA.TF
+Update the availability domain number for your standby region.
+
+```
+data "oci_identity_availability_domain" "ad" {
+    #Required
+    compartment_id = var.tenancy_ocid
+    ad_number = 1
+}
+```
+
