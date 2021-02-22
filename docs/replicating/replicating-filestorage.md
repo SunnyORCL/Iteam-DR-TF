@@ -60,7 +60,7 @@ variable "fingerprint" {}
 variable "private_key_path" {}
 variable "region" {}
 variable "ad" {
-	default = "1"
+	default = ""
 }
 
 ### IDENTITY IN DR SITE ###
@@ -71,41 +71,44 @@ variable "dr_fingerprint" {}
 variable "dr_private_key_path" {}
 variable "dr_region" {}
 variable "dr_ad" {
-	default = "2"
+	default = ""
 }
 
 ### FSS ###
 variable "fss_display_name" {
-        default = "var.fss_display_name"
+        default = "var.dr_fss_display_name"
 }
 
 ### MOUNT TARGET ###
 variable "mount_target_name"{
-        default = "var.mt_display_name"
+        default = "var.dr_mt_display_name"
 }
 ```
 
 ### Create the File System
 ```
-## Creates a FSS in the current enviornment ##
-resource "oci_file_storage_file_system" "fss_primary" {
-    #Required
-    availability_domain = data.oci_identity_availability_domain.ad.name
-    compartment_id = var.compartment_id
-    
-    #Optional
-    display_name = var.fss_display_name
-}
-
 ## Creates a secondary FSS in the Standby environment ##
 resource "oci_file_storage_file_system" "fss_dr" {
     #Required
-    availability_domain = var.dr_ad
+    availability_domain = data.oci_identity_availability_domain.ad.name
     compartment_id = var.dr_compartment_id
     
     #Optional
     display_name = var.dr_fss_display_name
-    defined_tags = null
-    freeform_tags = null
-    kms_key_id = null
 }
+```
+### Create the Mount Target
+```
+resource "oci_file_storage_mount_target" "dr_mount_target" {
+    #Required
+    availability_domain = data.oci_identity_availability_domain.ad.name
+    compartment_id = var.dr_compartment_id
+    subnet_id = oci_core_subnet.dr_subnet_id
+
+    #Optional
+    display_name = var.dr_mt_display_name
+}
+```
+### Create the Export for FSS
+```
+```
