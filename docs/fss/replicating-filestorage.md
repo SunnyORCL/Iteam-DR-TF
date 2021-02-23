@@ -114,7 +114,7 @@ resource "oci_file_storage_export" "fss_export" {
 ```
 ### SNAPSHOT
 
-<b>File Systems cannot be moved to a different availability domain or region.</b> This configuration creates a snapshot that can be copied using Oracle Tools such as <i>rsync</i>.
+<b>File Systems cannot be moved to a different availability domain or region.</b> This configuration creates a snapshot that can be copied to a different AD or region using Oracle Tools such as <i>rsync</i>.
 
 ```
 ### FSS SNAPSHOT
