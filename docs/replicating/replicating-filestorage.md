@@ -49,9 +49,10 @@ dr_region = "<Standby Region>"
 ```
 
 ### VARIABLES.TF
-Declare the variables that will be referenced in the FSS configuration.
+
+Declare the variables that will be referenced for the FSS configuration. Supply the IAM attributes and resource variables that will be used in the <i>variables.tf</i> file.
 ```
-### IDENTITY IN PRIMARY SITE ###
+### IDENTITY VARIABLES
 
 variable "compartment_id" {}
 variable "tenancy_ocid" {}
@@ -59,68 +60,54 @@ variable "user_ocid" {}
 variable "fingerprint" {}
 variable "private_key_path" {}
 variable "region" {}
-variable "ad" {
-	default = ""
-}
-
-### IDENTITY IN DR SITE ###
-variable "dr_compartment_id" {}
-variable "dr_tenancy_ocid" {}
-variable "dr_user_ocid" {}
-variable "dr_fingerprint" {}
-variable "dr_private_key_path" {}
-variable "dr_region" {}
-variable "dr_ad" {
-	default = ""
-}
-
-### FSS ###
-variable "fss_display_name" {
-        default = "var.dr_fss_display_name"
-}
-
-### MOUNT TARGET ###
-variable "mount_target_name"{
-        default = "var.dr_mt_display_name"
-}
 ```
 
-### Create the File System
+### FSS
+
+A new FSS will be created in a specified compartment and availability domain.
 ```
-## Creates a secondary FSS in the Standby environment ##
-resource "oci_file_storage_file_system" "fss_dr" {
+resource "oci_file_storage_file_system" "file_system" {
     #Required
     availability_domain = data.oci_identity_availability_domain.ad.name
-    compartment_id = var.dr_compartment_id
-    
-    #Optional
-    display_name = var.dr_fss_display_name
-}
-```
-### Create the Mount Target
-```
-resource "oci_file_storage_mount_target" "dr_mount_target" {
-    #Required
-    availability_domain = data.oci_identity_availability_domain.ad.name
-    compartment_id = var.dr_compartment_id
-    subnet_id = oci_core_subnet.dr_subnet_id
+    compartment_id = var.compartment_id
 
     #Optional
-    display_name = var.dr_mt_display_name
-}
-```
-### Create the Export for FSS
-```
-```
-
-### DATA.TF
-Update the availability domain number for your standby region.
-
-```
-data "oci_identity_availability_domain" "ad" {
-    #Required
-    compartment_id = var.tenancy_ocid
-    ad_number = 1
+    display_name = var.fss_display_name
+    defined_tags = <defined_tags>
+    freeform_tags = <freeform_tags>
+    kms_key_id = null
 }
 ```
 
+### MOUNT TARGET
+
+The example below will create one mount target that will be associated with an existing subnet. A file system can be associated with multiple mount targets at a time, only if both exists in the same availability domain. 
+
+```
+resource "oci_file_storage_mount_target" "mount_target" {
+  #Required
+  availability_domain = data.oci_identity_availability_domain.ad.name
+  compartment_id = var.compartment_id
+  subnet_id = var.subnet_id
+  
+  #Optional
+  display_name = var.mt_display_name
+  defined_tags = <defined_tags>
+  freeform_tags = <freeform_tags>
+  hostname_label = <hostname_labels> -- Hostname for the mount target's IP address
+  ip_address = <private_ip> -- An available private IP in the subnet's CIDR
+  nsg_ids = <nsg_ocids> -- Network Security Group OCIDs associated with the mount target. Maximum ID's = 5
+}
+```
+
+### EXPORT
+
+Create an export in a specific export set, export path, and file system. The <i>export_set_id</i> is supplied by the associated export set from the Mount Target creation and the <i>file_system_id</i> is supplied by the FSS creation at the beginning of this configuration.
+
+```
+### EXPORT 
+resource "oci_file_storage_export" "fss_export" {
+  export_set_id = oci_file_storage_mount_target.mount_target.export_set_id
+  file_system_id = oci_file_storage_file_system.file_system.id
+  path = var.export_path
+}
