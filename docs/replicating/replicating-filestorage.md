@@ -111,3 +111,16 @@ resource "oci_file_storage_export" "fss_export" {
   file_system_id = oci_file_storage_file_system.file_system.id
   path = var.export_path
 }
+```
+### SNAPSHOT
+
+<b>File Systems cannot be moved to a different availability domain or region.</b> This configuration will leverage the Oracle tool, <i>rsync</i>, to copy the data to a different AD or region.
+
+```
+### FSS SNAPSHOT
+resource "oci_file_storage_snapshot" "fss_snapshots" {
+    #Required
+    file_system_id = oci_file_storage_file_system.file_system.id
+    name = var.snapshot_name
+}
+```
