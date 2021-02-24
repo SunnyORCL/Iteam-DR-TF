@@ -2,10 +2,12 @@
 
 **./docs** - Documentation on enabling and planning for Disaster Recovery
 ```
-./docs.md
+./README.md
 
 /discovery/
     - orm.md
+/network/
+    - replication.md
 /replicating/
     - replicating-compute.md
     - replicating-database.md
@@ -13,5 +15,4 @@
     - replicating-networking.md
     - replicating-volume.md
 ```
-
 **./Terraform** - Terraform (Infrastructure as Code) code
