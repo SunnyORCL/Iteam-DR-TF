@@ -10,7 +10,13 @@ The following are the list of things to do to replicate your `primary` environme
 
 # Region-to-Region DR Enablement Steps and Goals
 ### 1. Discovery of Resources
-```
-./discovery/orm.md
-```
-**Goal**: To get the list of resources in the `primary` environment in Terraform (Infrastructure as Code) format, which we will then be updating manually and using to recreate the `standby` environment.
+
+__Goal__: To get the list of resources in the `primary` environment in Terraform (Infrastructure as Code) format, which we will then be updating manually and using to recreate the `standby` environment.
+
+[[Go To Guide]](./discovery/orm.md)
+
+### 2. Establishing Network Connectivity
+
+**Goal**: To replicate `primary` network components into another region, to where the `standby` environment will be. These network components will be used by all other components relying on networking and is therefore critical and sensitive.
+
+[[Go To Guide]](./network/replication.md)
