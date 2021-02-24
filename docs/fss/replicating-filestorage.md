@@ -3,18 +3,7 @@
 Configure the provider for the Primary and Standby environments. The purpose of this module is to enable interaction with Oracle Cloud Infrastructure (OCI) services and supported resources. Supply the appropriate authentication details as below:
 
 ```terraform
-### Primary Environment ###
-provider "oci" {
-	alias = "fss_primary"
-	region = var.region
-	tenancy_ocid = var.tenancy_ocid
-	user_ocid = var.user_ocid
-	fingerprint = var.fingerprint
-	private_key_path = var.private_key_path
-	
-}
-
-### DR Environment ###
+### Standby Environment ###
 provider "oci" {
     alias = "fss_dr"
     tenancy_ocid = var.dr.tenancy_ocid
@@ -31,20 +20,12 @@ provider "oci" {
 Environmental variables are configured to be agnostic. Therefore, Primary and DR environment values will be defned in the .tfvars file. 
 
 ```terraform
-#### PRIMARY TENANCY INFORMATION ####
-tenancy_ocid = "<Tenancy OCID>"
-user_ocid = "<User OCID"
-compartment_id = "<Compartment OCID>"
-fingerprint = "<User API Fingerprint>"
-private_key_path = "<Private Key Path for the API Fingerprint>"
-region = "<Primary Region>"
-
 #### DR/STANDBY TENANCY INFORMATION ####
 dr_tenancy_ocid = "<Standby Tenancy OCID>"
 dr_user_ocid = "<User OCID>"
 dr_compartment_id = "<Standby Compartment OCID>"
 dr_fingerprint = "<User API Fingerprint in Standby Environment>"
-dr_private_key_path = "Private Key Path for the API Fingerprint Created in Standby Environment>"
+dr_private_key_path = "<Private Key Path for the API Fingerprint Created in Standby Environment>"
 dr_region = "<Standby Region>"
 ```
 
@@ -107,9 +88,9 @@ resource "oci_file_storage_mount_target" "mount_target" {
   display_name = var.mt_display_name
   defined_tags = <defined_tags>
   freeform_tags = <freeform_tags>
-  hostname_label = <hostname_labels> -- Hostname for the mount target's IP address
-  ip_address = <private_ip> -- An available private IP in the subnet's CIDR
-  nsg_ids = <nsg_ocids> -- Network Security Group OCIDs associated with the mount target. Maximum ID's = 5
+  hostname_label = <hostname_labels>  /*Hostname for the mount target's IP address*/
+  ip_address = <private_ip>  /*An available private IP in the subnet's CIDR*/
+  nsg_ids = <nsg_ocids>  /*Network Security Group OCIDs associated with the mount target. Maximum ID's = 5*/
 }
 ```
 
