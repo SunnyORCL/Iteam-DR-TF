@@ -26,8 +26,8 @@ Primary Region contains a VCN, Subnet, Internet Gateway, with DB System running 
 - Select Standby Region     
     - Standby Region Name 
 - Standby Region Networking
-    - New VCN CIDR (Note: has to be non-overlapping to Primary Region VCN to allow for Peering)
-    - New Subnet CIDR                                                  
+    - Standby VCN CIDR (Note: has to be non-overlapping to Primary Region VCN to allow for Peering)
+    - Standby Subnet CIDR                                                  
 
 
 ## OCI Console Steps
@@ -37,7 +37,7 @@ Primary Region contains a VCN, Subnet, Internet Gateway, with DB System running 
     Stateless: No       Source: <STANDBY VCN CIDR>      IP Protocol: All Protocols
     Stateless: No       Source : 0.0.0.0/0              IP Protocol: TCP                Destination Port Range: 1521
 
-2. Download Resource Stack. Include availability_domain, core, database
+2. Download Resource Stack. Include availability_domain, core, and database modules.
 
 
 ## Changes to make to .tf files
@@ -168,12 +168,14 @@ data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1 {
 
     Create DRG in Primary Region
     ```
+    # Create Primary Region DRG
     resource oci_core_drg primary_region_drg {
         provider = oci.<PRIMARY REGION ALIAS NAME FROM PROVIDER FILE>
         compartment_id = var.compartment_ocid
         display_name = "PrimaryRegionDRG"
     }
-
+    
+    # Attach DRG to Primary VCN
     resource oci_core_drg_attachment primary_region_drg_attachment {
         provider = oci.<PRIMARY REGION ALIAS NAME FROM PROVIDER FILE>
         drg_id = oci_core_drg.primary_region_drg.id
@@ -183,11 +185,13 @@ data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1 {
 
     Create DRG in Standby Region
     ```
+    # Create Standby Region DRG
     resource oci_core_drg standby_region_drg {
         compartment_id = var.compartment_ocid
         display_name = "StandbyRegionDRG"
     }
-
+    
+    # Attach DRG to Standby VCN
     resource oci_core_drg_attachment standby_region_drg_attachment {
         drg_id = oci_core_drg.<RESOURCE NAME of STANDBY REGION'S DRG (from above)>.id
         vcn_id = oci_core_vcn.<RESOURCE NAME OF STANDBY REGION'S VCN (above)>.id
@@ -204,7 +208,7 @@ data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1 {
         display_name = "<DISPLAY NAME>"  #Optional
     }
 
-    # Create Standby RPC and Connect the RPCs
+    # Create Standby RPC and Connect the two RPCs
     resource oci_core_remote_peering_connection <STANDBY RPC RESOURCE NAME> {
         compartment_id = var.compartment_ocid
         drg_id = oci_core_drg.<STANDBY DRG RESOURCE NAME>.id
@@ -217,7 +221,7 @@ data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1 {
 
 Before moving to next section, need to make sure that the Primary region has the appropriate route rule. We will make this change from the OCI Console but first need the DRG to be created.
 1. Run the current terraform project (comment out all of database.tf)
-2. Add rule in Primary Region's Default Route table where traffic to destination <PRIMARY VCN CIDR> is routed to the <PRIMARY DRG>
+2. Add rule in Primary Region's Default Route table where traffic to destination PRIMARY VCN CIDR is routed to the PRIMARY DRG.
 
 WORKING NOTE: Right now, do not want to update existing resources using terraform script. Would require an extra step of importing in configurations and then has the risk of a user performing terraform destroy and altering primary region. Specifically, need to edit existing Subnet in primary region to (1) Change Route Table to including routing Standby VCN Traffic to DRG and (2) Change Security List for Data Guard communication. Currently performing those two steps from the console.
 
