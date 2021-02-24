@@ -33,11 +33,11 @@ WORKING NOTE: Does it need an internet gateway?
 
 ## OCI Console Steps
 
-1. Create a DB Security List to allow DB connections and communication with Standby DB's Subnet (take Subnet CIDR from New Variables). Assign to Primary DB's Subnet. (Step cannot be done in Terraform)
+1. Create a DB Security List to allow DB connections and communication with Standby DB's Subnet (take Subnet CIDR from New Variables). Assign to Primary DB's Subnet.
 
-    Stateless: No       Source: <STANDBY SUBNET CIDR>      IP Protocol: All Protocols
+    Stateless: No     Source: <STANDBY SUBNET CIDR>     IP Protocol: All Protocols
     
-    Stateless: No       Source : 0.0.0.0/0              IP Protocol: TCP                Destination Port Range: 1521
+    Stateless: No.    Source : 0.0.0.0/0                IP Protocol: TCP.               Destination Port Range: 1521
 
 2. Download Resource Stack. Include availability_domain, core, and database modules.
 
