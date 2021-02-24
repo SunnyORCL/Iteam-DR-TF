@@ -2,7 +2,8 @@
 
 ## Assumptions
 
-Primary Region contains a VCN, Subnet, Internet Gateway, with DB System running in Subnet. WORKING NOTE: Does it need an internet gateway?
+Primary Region contains a VCN, Subnet, Internet Gateway, with DB System running in Subnet. 
+WORKING NOTE: Does it need an internet gateway?
 
 ## Necessary Information
 
@@ -34,7 +35,8 @@ Primary Region contains a VCN, Subnet, Internet Gateway, with DB System running 
 
 1. Create a DB Security List to allow DB connections and communication with Standby DB's Subnet (take Subnet CIDR from New Variables). Assign to Primary DB's Subnet. (Step cannot be done in Terraform)
 
-    Stateless: No       Source: <STANDBY VCN CIDR>      IP Protocol: All Protocols
+    Stateless: No       Source: <STANDBY SUBNET CIDR>      IP Protocol: All Protocols
+    
     Stateless: No       Source : 0.0.0.0/0              IP Protocol: TCP                Destination Port Range: 1521
 
 2. Download Resource Stack. Include availability_domain, core, and database modules.
@@ -121,7 +123,7 @@ data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1 {
     resource oci_core_default_route_table <ROUTE TABLE RESOURCE NAME> {
         route_rules {
             destination       = "<PRIMARY REGION'S VCN CIDR>"
-            network_entity_id = oci_core_drg.<DRG RESOURCE NAME>.id
+            network_entity_id = oci_core_drg.<STANDBY DRG RESOURCE NAME>.id
         }
         ...
     }
@@ -136,7 +138,7 @@ data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1 {
 
 5. Update Security Lists
 
-    Update Database Security List ingress rule's source to Primary Region's Subnet CIDR to allow for communication.
+    Update Database Security List ingress rule's source to Primary Region's Subnet CIDR to allow for communication between the two database subnets.
     ```
     resource oci_core_security_list <DATABASE SECURITY LIST RESOURCE NAME> {
         ingress_security_rules {
@@ -221,7 +223,7 @@ data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1 {
 
 Before moving to next section, need to make sure that the Primary region has the appropriate route rule. We will make this change from the OCI Console but first need the DRG to be created.
 1. Run the current terraform project (comment out all of database.tf)
-2. Add rule in Primary Region's Default Route table where traffic to destination PRIMARY VCN CIDR is routed to the PRIMARY DRG.
+2. Add rule in Primary Region's Default Route table where traffic to destination STANDBY VCN CIDR is routed to the PRIMARY DRG.
 
 WORKING NOTE: Right now, do not want to update existing resources using terraform script. Would require an extra step of importing in configurations and then has the risk of a user performing terraform destroy and altering primary region. Specifically, need to edit existing Subnet in primary region to (1) Change Route Table to including routing Standby VCN Traffic to DRG and (2) Change Security List for Data Guard communication. Currently performing those two steps from the console.
 
