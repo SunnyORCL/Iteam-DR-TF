@@ -1,6 +1,7 @@
 <h1>Oracle Cloud Infrastructure (OCI) File Storage System Replication using Terraform</h1>
 
 <h3>Assumptions</h3>
+
 - The user has all IAM attributes
 - The user is granted appropriate privileges to create resources in the environment
 
