@@ -1,11 +1,17 @@
-### PROVIDER.TF
+<h1>Oracle Cloud Infrastructure (OCI) File Storage System Replication using Terraform</h1>
+
+<h3>Assumptions</h3>
+* The user has all IAM attributes
+* The user is granted appropriate privileges to create resources in the environment
+
+
+<b>1</b1>. ### PROVIDER.TF
 
 Configure the provider for the Primary and Standby environments. The purpose of this module is to enable interaction with Oracle Cloud Infrastructure (OCI) services and supported resources. Supply the appropriate authentication details as below:
 
 ```terraform
 ### Standby Environment ###
 provider "oci" {
-    alias = "fss_dr"
     tenancy_ocid = var.dr.tenancy_ocid
     user_ocid = var.dr.user_ocid
     finger = var.dr_fingerprint
@@ -15,21 +21,21 @@ provider "oci" {
 
 ```
 
-### TERRAFORM.TFVARS
+<b>2</b>. ### TERRAFORM.TFVARS
 
-Environmental variables are configured to be agnostic. Therefore, Primary and DR environment values will be defned in the .tfvars file. 
+Environmental variables are configured to be agnostic. Therefore, environment details will be defned in the .tfvars file. 
 
 ```terraform
 #### DR/STANDBY TENANCY INFORMATION ####
-dr_tenancy_ocid = "<Standby Tenancy OCID>"
-dr_user_ocid = "<User OCID>"
-dr_compartment_id = "<Standby Compartment OCID>"
-dr_fingerprint = "<User API Fingerprint in Standby Environment>"
-dr_private_key_path = "<Private Key Path for the API Fingerprint Created in Standby Environment>"
-dr_region = "<Standby Region>"
+tenancy_ocid = "<Standby Tenancy OCID>"
+user_ocid = "<User OCID>"
+compartment_id = "<Standby Compartment OCID>"
+fingerprint = "<User API Fingerprint in Standby Environment>"
+private_key_path = "<Private Key Path for the API Fingerprint Created in Standby Environment>"
+region = "<Standby Region>"
 ```
 
-### VARIABLES.TF
+<b>3</b>. ### VARIABLES.TF
 
 Declare the variables that will be referenced for the FSS configuration. Supply the IAM attributes and resource variables that will be used in the <i>variables.tf</i> file.
 
@@ -44,7 +50,7 @@ variable "private_key_path" {}
 variable "region" {}
 ```
 
-### DATA.TF
+<b>4</b>. ### DATA.TF
 If required, change the availability domain number based on the subscribed standby region. New regions will only have one availability domain. 
 
 ```terraform
@@ -56,7 +62,7 @@ data "oci_identity_availability_domain" "ad" {
 }
 ```
 
-### FSS
+<b>5</b4>. ### FSS
 
 A new FSS will be created in a specified compartment and availability domain.
 ```terraform
@@ -73,7 +79,7 @@ resource "oci_file_storage_file_system" "file_system" {
 }
 ```
 
-### MOUNT TARGET
+<b>6</b>. ### MOUNT TARGET
 
 The example below will create one mount target that will be associated with an existing subnet. A file system can be associated with multiple mount targets at a time, only if both exists in the same availability domain. 
 
@@ -94,7 +100,7 @@ resource "oci_file_storage_mount_target" "mount_target" {
 }
 ```
 
-### EXPORT
+<b>7<b>. ### EXPORT
 
 Create an export in a specific export set, export path, and file system. The <i>export_set_id</i> is supplied by the associated export set from the Mount Target creation and the <i>file_system_id</i> is supplied by the FSS creation at the beginning of this configuration.
 
@@ -106,7 +112,7 @@ resource "oci_file_storage_export" "fss_export" {
   path = var.export_path
 }
 ```
-### SNAPSHOT
+<b>8</b>. ### SNAPSHOT
 
 <b>File Systems cannot be moved to a different availability domain or region.</b> This configuration creates a snapshot that can be copied to a different AD or region using Oracle Tools such as <i>rsync</i>.
 
