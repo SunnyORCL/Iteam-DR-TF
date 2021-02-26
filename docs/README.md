@@ -15,23 +15,33 @@ __Goal__: To get the list of resources in the `primary` environment in Terraform
 
 [[Go To Guide]](./discovery/orm.md)
 
-### 2. Establishing Network Connectivity
+### 2. Terraform Code Preparation
+
+__Goal__: To get `primary` environment variables that will be used for the rest of the steps and update the included `provider.tf` and `vars.tf` .
+
+### 3. Establishing Network Connectivity
 
 **Goal**: To replicate `primary` network components into another region, to where the `standby` environment will be. These network components will be used by all other components relying on networking and is therefore critical and sensitive.
 
 [[Go To Guide]](./network/replication.md)
 
 
-### 3. Replicating Compute [If Exists]
+### 4. Replicating Compute [If Exists]
 
-### 4. Replicating Volumes [If Exists]
+### 5. Replicating Volumes [If Exists]
 
-### 5. Replicating Databases [If Exists]
+### 6. Replicating Databases [If Exists]
 [[Go To Guide]](./dataguard/replicating-dataguard.md)
 
-### 6. Replicating Object Storage [If Exists]
+### 7. Replicating Object Storage [If Exists]
+**Goal**: To replicate your Object Storage buckets from one region to another as well as establish object storage replication policies that will maintain multiple copies of data in your `primary` region to your `standby` region.
+
+
 [[Go To Guide]](./object_storage/replication.md)
 
 
 ### 8. Replicating File Storage [If Exists]
 [[Go To Guide]](./fss/replicating-filestorage.md)
+
+
+### 9. Clean Up
