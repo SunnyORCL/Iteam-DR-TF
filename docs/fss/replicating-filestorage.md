@@ -103,8 +103,7 @@ resource "oci_file_storage_mount_target" "mount_target" {
 
 <b>7<b>. EXPORT
 
-Create an export in a specific export set, export path, and file system. The <i>export_set_id</i> is supplied by the associated export set from the Mount Target creation and the <i>file_system_id</i> is supplied by the FSS creation at the beginning of this configuration.
-
+Create an export in a specific export set, export path, and file system. The <i>export_set_id</i> is supplied by the associated export set from the Mount Target creation and the <i>file_system_id</i> is supplied by the FSS creation at the beginning of this configuration. The FSS must have a minimum of one export in one mount target in order for instances to mount the file system.
 ```terraform
 ### EXPORT 
 resource "oci_file_storage_export" "fss_export" {
@@ -123,5 +122,19 @@ resource "oci_file_storage_snapshot" "fss_snapshots" {
     #Required
     file_system_id = oci_file_storage_file_system.file_system.id
     name = var.snapshot_name
+}
+```
+<b><i>OPTIONAL</i></b>
+Export sets can be <i>managed</i> through terraform. The export set resource below allows the user to update file system attributes that are associated with the specified mount target.
+```terraform
+### EXPORT SET
+resource "oci_file_storage_export_set" "exps_1" {
+  # Required
+  mount_target_id = oci_file_storage_mount_target.mount_target.id
+
+  # Optional
+  display_name = var.expset_name
+  max_fs_stat_bytes = var.max_fss_byte
+  max_fs_stat_files = var.max_fss_files
 }
 ```
