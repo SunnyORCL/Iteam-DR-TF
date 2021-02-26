@@ -9,26 +9,31 @@ The following are the list of things to do to replicate your `primary` environme
 
 
 # Region-to-Region DR Enablement Steps and Goals
-### 1. Discovery of Resources
+## Discovery
+### 1. Resource Discovery with ORM
 
 __Goal__: To get the list of resources in the `primary` environment in Terraform (Infrastructure as Code) format, which we will then be updating manually and using to recreate the `standby` environment.
 
 [[Go To Guide]](./discovery/orm.md)
 
+## Replication
 ### 2. Terraform Code Preparation
 
 __Goal__: To get `primary` environment variables that will be used for the rest of the steps and update the included `provider.tf` and `vars.tf` .
 
 ### 3. Establishing Network Connectivity
 
-**Goal**: To replicate `primary` network components into another region, to where the `standby` environment will be. These network components will be used by all other components relying on networking and is therefore critical and sensitive.
+**Goal**: To replicate `primary` network components into another region, to where the `standby` environment will be. These network components will be used by all other components including `primary` environment Load Balancers relying on networking and is therefore critical and sensitive.
 
 [[Go To Guide]](./network/replication.md)
 
 
 ### 4. Replicating Compute [If Exists]
 
+[[Go To Guide]](./compute/compute.md)
+
 ### 5. Replicating Volumes [If Exists]
+[[Go To Guide]](./compute/compute.md)
 
 ### 6. Replicating Databases [If Exists]
 [[Go To Guide]](./dataguard/replicating-dataguard.md)
@@ -43,5 +48,11 @@ __Goal__: To get `primary` environment variables that will be used for the rest 
 ### 8. Replicating File Storage [If Exists]
 [[Go To Guide]](./fss/replicating-filestorage.md)
 
+
+## Connectivity
+### 9. Ensuring Availability with DNS
+**Goal**: Use DNS steering management to redirect client traffic to the current production region after a failover.
+
+[[Go To Guide]](./dns/connectivity.md)
 
 ### 9. Clean Up
