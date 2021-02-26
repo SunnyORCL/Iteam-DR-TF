@@ -81,7 +81,7 @@ variable "export_path"{
 /* EXPORT SET */
 variable "expset_name"{default = "<Export_Set_Name"}
 variable "max_fs_byte"{default = 23843202333} /* Update the maximum tbytes, fbytes, and abytes values
-variable "max_fs_files"{default = 223442} /* Update the tffiles, ffiles and afiles values
+variable "max_fs_files"{default = 223442} /* Update the tffiles, ffiles and afiles values */
 
 /* FSS Snapshots */
 variable "snapshot_name"{default = "<Snapshot_Name>"}
@@ -133,9 +133,9 @@ resource "oci_file_storage_mount_target" "mount_target" {
   display_name = var.mt_display_name
   defined_tags = <defined_tags>
   freeform_tags = <freeform_tags>
-  hostname_label = <hostname_labels>  /*Hostname for the mount target's IP address*/
-  ip_address = <private_ip>  /*An available private IP in the subnet's CIDR*/
-  nsg_ids = <nsg_ocids>  /*Network Security Group OCIDs associated with the mount target. Maximum ID's = 5*/
+  hostname_label = <hostname_labels>  /* Hostname for the mount target's IP address */
+  ip_address = <private_ip>  /* An available private IP in the subnet's CIDR */
+  nsg_ids = <nsg_ocids>  /* Network Security Group OCIDs associated with the mount target. Maximum ID's = 5 */
 }
 ```
 
@@ -169,7 +169,7 @@ Export sets can be <i>managed</i> through terraform. The export set resource bel
 ```terraform
 resource "oci_file_storage_export_set" "exps_1" {
   # Required
-  mount_target_id = oci_file_storage_mount_target.mount_target.id
+  mount_target_id = oci_file_storage_mount_target.mount_target.id /* Referencing export set created from mount_target resource */
 
   # Optional
   display_name = var.expset_name
