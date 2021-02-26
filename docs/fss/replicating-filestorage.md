@@ -5,6 +5,10 @@
 - The user has all IAM attributes
 - The user is granted appropriate privileges to create resources in the environment
 
+<h3>Dependencies</h3>
+- VCN and Subnet resource is already created
+
+
 
 <b>1</b1>. PROVIDER.TF
 
