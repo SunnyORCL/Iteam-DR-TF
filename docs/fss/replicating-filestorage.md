@@ -68,7 +68,7 @@ variable "fss_display_name" {
         default = <FSS_Name>
 }
 
-/* Mount Target Variables
+/* Mount Target Variables */
 variable "mt_display_name"{
         default = <Mount_Target_Name>
 }
@@ -92,7 +92,7 @@ variable "snapshot_name"{default = "<Snapshot_Name>"}
 If required, change the availability domain number based on the subscribed standby region. New regions will only have one availability domain. 
 
 ```terraform
-/* PURPOSE: List out the Availability Domains in OCI
+/* PURPOSE: List out the Availability Domains in OCI */
 data "oci_identity_availability_domain" "ad" {
     #Required
     compartment_id = var.tenancy_ocid
@@ -144,7 +144,6 @@ resource "oci_file_storage_mount_target" "mount_target" {
 Create an export in a specific export set, export path, and file system. The <i>export_set_id</i> is supplied by the associated export set from the Mount Target creation and the <i>file_system_id</i> is supplied by the FSS creation at the beginning of this configuration. The FSS must have a minimum of one export in one mount target in order for instances to mount the file system.
 
 ```terraform
-### EXPORT 
 resource "oci_file_storage_export" "fss_export" {
   export_set_id = oci_file_storage_mount_target.mount_target.export_set_id
   file_system_id = oci_file_storage_file_system.file_system.id
@@ -157,7 +156,6 @@ resource "oci_file_storage_export" "fss_export" {
 <b>File Systems cannot be moved to a different availability domain or region.</b> This configuration creates a snapshot that can be copied to a different AD or region using Oracle Tools such as <i>rsync</i>.
 
 ```terraform
-### FSS SNAPSHOT
 resource "oci_file_storage_snapshot" "fss_snapshots" {
     #Required
     file_system_id = oci_file_storage_file_system.file_system.id
@@ -167,8 +165,8 @@ resource "oci_file_storage_snapshot" "fss_snapshots" {
 #### <i>OPTIONAL:</i>
 
 Export sets can be <i>managed</i> through terraform. The export set resource below allows the user to update file system attributes that are associated with the specified mount target.
+
 ```terraform
-### EXPORT SET
 resource "oci_file_storage_export_set" "exps_1" {
   # Required
   mount_target_id = oci_file_storage_mount_target.mount_target.id
