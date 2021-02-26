@@ -20,3 +20,18 @@ __Goal__: To get the list of resources in the `primary` environment in Terraform
 **Goal**: To replicate `primary` network components into another region, to where the `standby` environment will be. These network components will be used by all other components relying on networking and is therefore critical and sensitive.
 
 [[Go To Guide]](./network/replication.md)
+
+
+### 3. Replicating Compute [If Exists]
+
+### 4. Replicating Volumes [If Exists]
+
+### 5. Replicating Databases [If Exists]
+[[Go To Guide]](./dataguard/replicating-dataguard.md)
+
+### 6. Replicating Object Storage [If Exists]
+[[Go To Guide]](./object_storage/replication.md)
+
+
+### 8. Replicating File Storage [If Exists]
+[[Go To Guide]](./fss/replicating-filestorage.md)

@@ -1,5 +1,5 @@
-# Oracle Resource Manager: Discover Resources
-**Documentation**: [[Resource Manager]](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Concepts/landing.htm)
+# Oracle Resource Manager(ORM): Discover Resources
+**ORM Documentation**: [[Resource Manager]](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Concepts/landing.htm)
 
 **Goal**: To get the list of resources in the `primary` environment in Terraform (Infrastructure as Code) format, which we will then be updating manually and using to recreate the `standby` environment.
 
