@@ -29,30 +29,29 @@ __Goal__: To get `primary` environment variables that will be used for the rest 
 
 [[Go To Guide]](./network/replication.md)
 
-
-### 4. Replicating Compute [If Exists]
+### 4. Replicating Compute Instances (if these resources exist)
 
 [[Go To Guide]](./compute/compute.md)
 
-### 5. Replicating Volumes [If Exists]
+### 5. Replicating Volumes (if these resources exist)
 [[Go To Guide]](./compute/compute.md)
 
-### 6. Replicating Databases [If Exists]
+### 6. Replicating Databases (if these resources exist)
 [[Go To Guide]](./dataguard/replicating-dataguard.md)
 
-### 7. Replicating Object Storage [If Exists]
+### 7. Replicating Object Storage (if these resources exist)
 **Goal**: To replicate your Object Storage buckets from one region to another as well as establish object storage replication policies that will maintain multiple copies of data in your `primary` region to your `standby` region.
 
 
 [[Go To Guide]](./object_storage/replication.md)
 
 
-### 8. Replicating File Storage [If Exists]
+### 8. Replicating File Storage (if these resources exist)
 [[Go To Guide]](./fss/replicating-filestorage.md)
 
 
 ## Connectivity
-### 9. Ensuring Availability with DNS
+### 9. Ensuring Availability with DNS (if these resources exist)
 **Goal**: Use DNS steering management to redirect client traffic to the current production region after a failover.
 
 [[Go To Guide]](./dns/connectivity.md)
