@@ -19,15 +19,15 @@ __Goal__: To get the list of resources in the `primary` environment in Terraform
 ## Replication
 ### 2. Terraform Code Preparation
 
-__Goal__: To get `primary` environment variables that will be used for the rest of the steps and update the included `provider.tf` and `vars.tf` .
+__Goal__: To get `primary` environment variables that will be used for the rest of the steps and update the included `provider.tf` and `vars.tf`.
 
-[[Go To Guide]](./network/replication.md)
+[[Go To Guide]](./replication_prep/terraform_prep.md)
 
 ### 3. Establishing Network Connectivity
 
 **Goal**: To replicate `primary` network components into another region, to where the `standby` environment will be. These network components will be used by all other components including `primary` environment Load Balancers relying on networking and is therefore critical and sensitive.
 
-[[Go To Guide]](./replication_prep/terraform_prep.md)
+[[Go To Guide]](./network/replication.md)
 
 
 ### 4. Replicating Compute [If Exists]
