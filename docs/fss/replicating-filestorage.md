@@ -6,6 +6,7 @@
 - The user is granted appropriate privileges to create resources in the environment
 
 <h3>Dependencies</h3>
+
 - VCN and Subnet resource is already created
 
 
