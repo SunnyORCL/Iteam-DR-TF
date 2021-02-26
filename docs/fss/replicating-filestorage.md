@@ -1,12 +1,13 @@
 <h1>Oracle Cloud Infrastructure (OCI) File Storage System Replication using Terraform</h1>
 
+<h3>Purpose</h3>
+The resources will create 1 FSS, 1 Mount Target, FSS and Snapshot with an option to manage export set attributes in a given compartment and VCN. 
+
+
 <h3>Assumptions</h3>
 
-- The user has all IAM attributes
+- The user has all required IAM information that will be used throughout the configuration
 - The user is granted appropriate privileges to create resources in the environment
-
-<h3>Dependencies</h3>
-
 - VCN and Subnet resource is already created
 
 
