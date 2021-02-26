@@ -44,7 +44,7 @@ region = "<Standby Region>"
 
 #### 3. VARIABLES.TF
 
-Declare the variables that will be referenced for the FSS configuration. Supply the IAM attributes and resource variables that will be used in the <i>variables.tf</i> file.
+Declare the variables that will be referenced for the FSS configuration. Supply the IAM attributes and resource variables that will be used in the `VARIABLES.tf` file.
 
 ```terraform
 ### IDENTITY VARIABLES ###
@@ -58,12 +58,12 @@ variable "region" {}
 
 ### RESOURCE VARIABLES ###
 
-/* Subnet OCID for the Mount Target 
+/* Subnet OCID for the Mount Target */
 variable "subnet_id" {
         default =<Subnet_OCID>
 }
 
-/* File Storage Variables 
+/* File Storage Variables */
 variable "fss_display_name" {
         default = <FSS_Name>
 }
@@ -73,21 +73,19 @@ variable "mt_display_name"{
         default = <Mount_Target_Name>
 }
 
-### EXPORT
+/* EXPORT */
 variable "export_path"{
         default = "</insertpath>"
 }
 
-### EXPORT SET
+/* EXPORT SET */
 variable "expset_name"{default = "<Export_Set_Name"}
 variable "max_fs_byte"{default = 23843202333} /* Update the maximum tbytes, fbytes, and abytes values
 variable "max_fs_files"{default = 223442} /* Update the tffiles, ffiles and afiles values
 
-### FSS Snapshots
+/* FSS Snapshots */
 variable "snapshot_name"{default = "<Snapshot_Name>"}
 ```
-
-
 
 #### DATA.TF
 
@@ -109,7 +107,7 @@ A new FSS will be created in a specified compartment and availability domain.
 ```terraform
 resource "oci_file_storage_file_system" "file_system" {
     #Required
-    availability_domain = data.oci_identity_availability_domain.ad.name /* Value for AD from: DATA.TF
+    availability_domain = data.oci_identity_availability_domain.ad.name /* Value for AD from: DATA.TF */
     compartment_id = var.compartment_id
 
     #Optional
