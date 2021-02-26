@@ -1,4 +1,4 @@
-<h1>Oracle Cloud Infrastructure (OCI) File Storage System Replication using Terraform</h1>
+<h1>Replicating File Storage System (FSS) Oracle Cloud Infrastructure (OCI) using Terraform</h1>
 
 <h3>Purpose</h3>
 The resources will create 1 FSS, 1 Mount Target, FSS and Snapshot with an option to manage export set attributes in a given compartment and VCN. 
@@ -58,6 +58,7 @@ variable "region" {}
 ```
 
 <b>4</b>. DATA.TF
+
 If required, change the availability domain number based on the subscribed standby region. New regions will only have one availability domain. 
 
 ```terraform
