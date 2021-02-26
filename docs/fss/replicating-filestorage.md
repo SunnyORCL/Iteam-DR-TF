@@ -129,7 +129,8 @@ resource "oci_file_storage_snapshot" "fss_snapshots" {
     name = var.snapshot_name
 }
 ```
-<b><i>OPTIONAL</i></b>
+<b><i>OPTIONAL:</i></b>
+
 Export sets can be <i>managed</i> through terraform. The export set resource below allows the user to update file system attributes that are associated with the specified mount target.
 ```terraform
 ### EXPORT SET
