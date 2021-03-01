@@ -43,8 +43,7 @@ __Goal__: To get `primary` environment variables that will be used for the rest 
 [[Go To Guide]](./dataguard/replicating-dataguard.md)
 
 ### 7. Replicating Object Storage (if these resources exist)
-**Goal**: To replicate your Object Storage buckets from one region to another as well as establish object storage replication policies that will maintain multiple copies of data in your `primary` region to your `standby` region.
-
+**Goal**: To recreate your Object Storage buckets _and_ objects from one region to another as well as establish object storage replication policies that will maintain multiple copies of data in your `primary` region to your `standby` region.
 
 [[Go To Guide]](./object_storage/replication.md)
 
