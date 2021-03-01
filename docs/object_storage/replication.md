@@ -95,7 +95,7 @@ For each Object Storage Bucket resource that appears in your `object_storage.tf`
 
     Alternatively, you can use the OCI console to create policies, you can navigate to your Object Storage Bucket in your `primary` region. Then select `Replication Policy` within the Bucket Details page.
 
-    ![img](./resources/finding_replication.PNG)
+    ![img](./resources/finding_replication.png)
 
     Then click `Create Policy` and fill out following:
     + Your Replication Policy Name
