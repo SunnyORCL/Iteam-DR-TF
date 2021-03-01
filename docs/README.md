@@ -37,6 +37,9 @@ __Goal__: To get `primary` environment variables that will be used for the rest 
 [[Go To Guide]](./compute/compute.md)
 
 ### 6. Replicating Databases (if these resources exist)
+Goal: To replicate your database from one region to another and maintain both copies of data by enabling data guard in the `primary` region.
+
+
 [[Go To Guide]](./dataguard/replicating-dataguard.md)
 
 ### 7. Replicating Object Storage (if these resources exist)
