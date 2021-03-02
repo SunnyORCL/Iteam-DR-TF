@@ -54,6 +54,7 @@ Create Compute Instance
  - compartment
  - instance name
  - instance shape
+ - Image Used
  - specify OCPU and RAM count
 
 ```
