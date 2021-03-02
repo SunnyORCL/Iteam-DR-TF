@@ -36,6 +36,7 @@
     }
     ```
 
+
 2. Select the volumes to be included in the volume group to be backed up. To choose these volumes, you have two options: 
         
       1. You can either pull the list of volumes as a data source. This will be the best solution if all of the volumes in the specified compartment need to be included in the backup OR if all the required volumes can be easily filtered by a tag or by a ----
@@ -53,6 +54,7 @@
         }
     }
     ```
+
 
 3. Create the volume group and assign the backup policy. If using the second solution above, replace the volume_ids field `oci_core_volumes.tagged_volumes.volumes[*].id` with a list of the OCIDs from the console - the commented out line below.
 
@@ -72,5 +74,6 @@
         backup_policy_id = oci_core_volume_backup_policy.block_backup_policy.id
     }
     ```
+
 
 4. Clean-up CORE.TF - Remove any Volume resources blocks (Block Volumes, Policies, Volume Groups) defined automatically by the primary region terraform output. All we will need is the backup and on failure, we will provision the backup to a Block Volume.
