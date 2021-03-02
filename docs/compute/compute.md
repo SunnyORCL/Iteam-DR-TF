@@ -51,30 +51,33 @@ Create Compute Instance
    
 ```
    
-  resource oci_core_instance <Instance Name> {
-  
-  availability_config {
-    recovery_action = "RESTORE_INSTANCE"
-  }
-  
-  availability_domain = <Standby Availability Domain>
-  compartment_id      = <Standby Compartment ID>
-  
-  create_vnic_details {
-    subnet_id = <Subnet ID>
-	}
+resource oci_core_instance < Instance Name > {
 
-  
-  shape = "VM.Standard.E2.1.Micro"
-  shape_config {
-    memory_in_gbs = "1" #Specify Memory
-    ocpus         = "1" #Specify OCPU Count
-  }
-  source_details {
-    source_id   = <Source Image for Instance>
-    source_type = "image"
-  }
-  state = "RUNNING"
+    availability_config {
+        recovery_action = "RESTORE_INSTANCE"
+    }
+
+    availability_domain = < Standby Availability Domain >
+    compartment_id = < Standby Compartment ID >
+
+    create_vnic_details {
+        subnet_id = < Subnet ID >
+    }
+
+
+    shape = <Instance Shape>
+    shape_config {
+        memory_in_gbs = "1"
+        #Specify Memory
+        ocpus = "1"
+        #Specify OCPU Count
+    }
+    source_details {
+        source_id = < Source Image
+        for Instance >
+            source_type = "image"
+    }
+    state = "RUNNING"
 }
 
 ```
