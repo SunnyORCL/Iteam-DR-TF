@@ -45,10 +45,6 @@ WORKING NOTE: DO YOU MAYBE HAVE TO CHANGE THESE VALUES? IS KEEPING ALL THE VALUE
 
 
 
-
-
-
-
 ### INSTANCE.TF
 
 Create Compute Instance
@@ -105,7 +101,7 @@ Create Volumes for Compute
  - volume name
  - (optional) size and backup policy
 
-```resource oci_core_volume export_TestVol {
+```resource oci_core_volume "Vol Name" {
   availability_domain = <Standby Availability Domain>
   compartment_id      = <Standby Compartment ID>
   display_name = <Display Name>
