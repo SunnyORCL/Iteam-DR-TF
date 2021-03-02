@@ -58,6 +58,7 @@ Create Compute Instance
  - compartment
  - instance name
  - instance shape
+ - specify OCPU and RAM count
 
 ```
 resource "oci_core_instance" "instance" {
@@ -77,6 +78,7 @@ resource "oci_core_instance" "instance" {
         display_name = <Instance Name>
         hostname_label = <Instance Name>
         private_ip = <Private IP address>
+        subnet_id  = <Subnet ID>
     }
 
     shape_config {
