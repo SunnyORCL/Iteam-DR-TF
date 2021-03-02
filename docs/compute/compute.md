@@ -105,25 +105,21 @@ Create Volumes for Compute
  - volume name
  - (optional) size and backup policy
 
-```hcl
-resource "oci_core_volume" "test_volume" {
-    #Required
-    availability_domain = var.volume_availability_domain
-    compartment_id = var.compartment_id
-
-    #Optional
-    display_name = <Instance Name>
-    size_in_gbs = <Specify Size in GB
-    size_in_mbs = var.volume_size_in_mbs
-    
-    
-    source_details {
-        #Required
-        id = var.volume_source_details_id
-        type = var.volume_source_details_type
-    }
-    vpus_per_gb = var.volume_vpus_per_gb
+```resource oci_core_volume export_TestVol {
+  availability_domain = <Standby Availability Domain>
+  compartment_id      = <Standby Compartment ID>
+  display_name = <Display Name>
+  is_auto_tune_enabled = "false"
+  size_in_gbs = "50"
+  vpus_per_gb = "0"
 }
+
+resource oci_core_volume_backup_policy_assignment export_TestVol_volume_backup_policy_assignment_1 {
+  #Specify BAckup Policy
+  asset_id  = oci_core_volume.export_TestVol.id
+  policy_id = "ocid1.volumebackuppolicy.oc1..aaaaaaaadrzfwjb5tflixtmy5axp2kx65uqakgnupfogabzjhtn5x5dfra6q"
+}
+
 ```
 
 
