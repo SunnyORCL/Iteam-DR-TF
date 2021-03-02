@@ -57,7 +57,7 @@ Create Compute Instance
  - specify OCPU and RAM count
 
 ```
-resource "oci_core_instance" "instance" {
+resource "oci_core_instance" <Instance Name> {
     #Required
     
     availability_config {
@@ -103,7 +103,7 @@ Create Volumes for Compute
 
 ```
 
-resource oci_core_volume "Vol Name" {
+resource oci_core_volume <Vol Name> {
   availability_domain = <Standby Availability Domain>
   compartment_id      = <Standby Compartment ID>
   display_name = <Display Name>
@@ -133,7 +133,7 @@ Create Volumes for Compute
 
 ```
 
-resource "oci_core_volume_group" "Vol Group Name" {
+resource "oci_core_volume_group" <Vol Group Name> {
     #Required
     availability_domain = <Standby Availability Domain>
     compartment_id = <Standby Compartment ID>
