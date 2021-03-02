@@ -90,33 +90,3 @@ resource "oci_core_instance" <Instance Name> {
         source_type = "image"
     }
    ```
-
-
-### VOLUME.TF
-
-Create Volumes for Compute
-
- Fill in variables for 
- - availability domain
- - compartment
- - volume name
- - (optional) size and backup policy
-
-```
-
-resource oci_core_volume <Vol Name> {
-  availability_domain = <Standby Availability Domain>
-  compartment_id      = <Standby Compartment ID>
-  display_name = <Display Name>
-  is_auto_tune_enabled = "false"
-  size_in_gbs = "50"
-  vpus_per_gb = "0"
-}
-
-resource oci_core_volume_backup_policy_assignment export_TestVol_volume_backup_policy_assignment_1 {
-  #Specify Backup Policy
-  asset_id  = oci_core_volume.export_TestVol.id
-  policy_id = "ocid1.volumebackuppolicy.oc1..aaaaaaaadrzfwjb5tflixtmy5axp2kx65uqakgnupfogabzjhtn5x5dfra6q"
-}
-
-```
