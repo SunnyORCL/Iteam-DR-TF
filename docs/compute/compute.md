@@ -62,24 +62,32 @@ Create Compute Instance
 ```
 resource "oci_core_instance" "instance" {
     #Required
-    availability_domain = local.instance_availability_domain[var.ad]
-    compartment_id = var.compartment_id
-    shape = var.instance_shape
+    
+    availability_config {
+    recovery_action = "RESTORE_INSTANCE"
+    }
+    
+    availability_domain = <Standby Availability Domain>
+    compartment_id = <Standby Compartment Name>
+    shape = <Instance Shape>
 
     create_vnic_details {
-        #Optional
-        assign_public_ip = var.is_public
-        display_name = var.vnic_name
-        hostname_label = var.hostname_label
-        private_ip = var.private_ip
-        subnet_id = var.subnet_id
-        defined_tags = var.defined_tags
-        freeform_tags = var.freeform_tags
+        #Optional Configuration
+        assign_public_ip = <True or False>
+        display_name = <Instance Name>
+        hostname_label = <Instance Name>
+        private_ip = <Private IP address>
     }
+
+    shape_config {
+    #customize here
+    memory_in_gbs = "1"
+    ocpus         = "1"
+   }
 
     source_details {
         #Required
-        source_id = var.source_image
+        source_id = <Source Image for Instance>
         source_type = "image"
     }
    ```
@@ -102,14 +110,11 @@ resource "oci_core_volume" "test_volume" {
     compartment_id = var.compartment_id
 
     #Optional
-    backup_policy_id = data.oci_core_volume_backup_policies.test_volume_backup_policies.volume_backup_policies.0.id
-    defined_tags = {"Operations.CostCenter"= "42"}
-    display_name = var.volume_display_name
-    freeform_tags = {"Department"= "Finance"}
-    is_auto_tune_enabled = var.volume_is_auto_tune_enabled
-    kms_key_id = oci_kms_key.test_key.id
-    size_in_gbs = var.volume_size_in_gbs
+    display_name = <Instance Name>
+    size_in_gbs = <Specify Size in GB
     size_in_mbs = var.volume_size_in_mbs
+    
+    
     source_details {
         #Required
         id = var.volume_source_details_id
