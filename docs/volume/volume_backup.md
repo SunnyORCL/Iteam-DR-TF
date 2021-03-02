@@ -38,9 +38,9 @@
 
 2. Select the volumes to be included in the volume group to be backed up. To choose these volumes, you have two options: 
         
-        1. You can either pull the list of volumes as a data source. This will be the best solution if all of the volumes in the specified compartment need to be included in the backup OR if all the required volumes can be easily filtered by a tag or by a ----
+      1. You can either pull the list of volumes as a data source. This will be the best solution if all of the volumes in the specified compartment need to be included in the backup OR if all the required volumes can be easily filtered by a tag or by a ----
 
-        2. You can go into the OCI console and find the OCIDs of all the block volumes to be backed up. This will be the best solution if only a subset of the volumes need to be backed up or cannot be easily filtered. 
+      2. You can go into the OCI console and find the OCIDs of all the block volumes to be backed up. This will be the best solution if only a subset of the volumes need to be backed up or cannot be easily filtered. 
 
     If you choose to use solution one, add the data source below to your code. If backing up ALL the blocked volumes in the compartment and not using the tags, remove the filter block within the code.
     ```
