@@ -67,10 +67,13 @@ resource oci_core_instance < Instance Name > {
 
     shape = <Instance Shape>
     shape_config {
-        memory_in_gbs = "1"
+    
         #Specify Memory
-        ocpus = "1"
+        memory_in_gbs = "1"
+       
         #Specify OCPU Count
+        ocpus = "1"
+        
     }
     source_details {
         source_id = < Source Image
