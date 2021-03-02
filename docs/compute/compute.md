@@ -93,27 +93,27 @@ resource "oci_core_instance" <Instance Name> {
    
    ```
    
-   resource oci_core_instance instance-20210302-1434 {
+   resource oci_core_instance <Instance Name> {
   
   availability_config {
     recovery_action = "RESTORE_INSTANCE"
   }
   
-  availability_domain = "YzEE:US-ASHBURN-AD-3"
-  compartment_id      = var.compartment_ocid
+  availability_domain = <Standby Availability Domain>
+  compartment_id      = <Standby Compartment ID>
   
   create_vnic_details {
-    subnet_id = oci_core_subnet.export_subnet-20210302-1434.id
+    subnet_id = <Subnet ID>
 	}
 
   
   shape = "VM.Standard.E2.1.Micro"
   shape_config {
-    memory_in_gbs = "1"
-    ocpus         = "1"
+    memory_in_gbs = "1" #Specify Memory
+    ocpus         = "1" #Specify OCPU Count
   }
   source_details {
-    source_id   = var.export_instance-20210302-1434_source_image_id
+    source_id   = <Instance Image>
     source_type = "image"
   }
   state = "RUNNING"
