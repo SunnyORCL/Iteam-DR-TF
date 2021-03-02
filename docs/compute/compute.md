@@ -58,7 +58,7 @@ Create Compute Instance
  - Image Used
  - specify OCPU and RAM count
    
-   ```
+```
    
   resource oci_core_instance <Instance Name> {
   
