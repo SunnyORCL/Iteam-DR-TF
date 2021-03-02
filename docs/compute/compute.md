@@ -120,4 +120,35 @@ resource oci_core_volume_backup_policy_assignment export_TestVol_volume_backup_p
 
 ```
 
+### OCI_CORE_VOLUME_GROUP.TF
+
+Create Volumes for Compute
+
+ Fill in variables for 
+ - availability domain
+ - compartment
+ - volume Group Name
+ - IDs of volumes
+ - (optional) size and backup policy
+
+```
+
+resource "oci_core_volume_group" "Vol Group Name" {
+    #Required
+    availability_domain = <Standby Availability Domain>
+    compartment_id = <Standby Compartment ID>
+    source_details {
+        #Required
+        #Specify Volume IDs
+        type = "volumeIds"
+        volume_ids = <Enter Volume IDs>
+    }
+
+    #Optional
+    backup_policy_id = data.oci_core_volume_backup_policies.test_volume_backup_policies.volume_backup_policies.0.id
+    display_name = <Volume Group Name>
+}
+
+```
+
 
