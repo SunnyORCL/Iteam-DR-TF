@@ -54,46 +54,14 @@ Create Compute Instance
  - compartment
  - instance name
  - instance shape
+ - Subnet Used
  - Image Used
  - specify OCPU and RAM count
-
-```
-resource "oci_core_instance" <Instance Name> {
-    #Required
-    
-    availability_config {
-    recovery_action = "RESTORE_INSTANCE"
-    }
-    
-    availability_domain = <Standby Availability Domain>
-    compartment_id = <Standby Compartment Name>
-    shape = <Instance Shape>
-
-    create_vnic_details {
-        #Optional Configuration
-        assign_public_ip = <True or False>
-        display_name = <Instance Name>
-        hostname_label = <Instance Name>
-        private_ip = <Private IP address>
-        subnet_id  = <Subnet ID>
-    }
-
-    shape_config {
-    #customize here
-    memory_in_gbs = "1"
-    ocpus         = "1"
-   }
-
-    source_details {
-        #Required
-        source_id = <Source Image for Instance>
-        source_type = "image"
-    }
-   ```
+   
    
    ```
    
-   resource oci_core_instance <Instance Name> {
+  resource oci_core_instance <Instance Name> {
   
   availability_config {
     recovery_action = "RESTORE_INSTANCE"
@@ -113,7 +81,7 @@ resource "oci_core_instance" <Instance Name> {
     ocpus         = "1" #Specify OCPU Count
   }
   source_details {
-    source_id   = <Instance Image>
+    source_id   = <Source Image for Instance>
     source_type = "image"
   }
   state = "RUNNING"
