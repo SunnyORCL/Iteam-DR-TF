@@ -90,3 +90,33 @@ resource "oci_core_instance" <Instance Name> {
         source_type = "image"
     }
    ```
+   
+   ```
+   
+   resource oci_core_instance instance-20210302-1434 {
+  
+  availability_config {
+    recovery_action = "RESTORE_INSTANCE"
+  }
+  
+  availability_domain = "YzEE:US-ASHBURN-AD-3"
+  compartment_id      = var.compartment_ocid
+  
+  create_vnic_details {
+    subnet_id = oci_core_subnet.export_subnet-20210302-1434.id
+	}
+
+  
+  shape = "VM.Standard.E2.1.Micro"
+  shape_config {
+    memory_in_gbs = "1"
+    ocpus         = "1"
+  }
+  source_details {
+    source_id   = var.export_instance-20210302-1434_source_image_id
+    source_type = "image"
+  }
+  state = "RUNNING"
+}
+
+```
