@@ -101,7 +101,9 @@ Create Volumes for Compute
  - volume name
  - (optional) size and backup policy
 
-```resource oci_core_volume "Vol Name" {
+```
+
+resource oci_core_volume "Vol Name" {
   availability_domain = <Standby Availability Domain>
   compartment_id      = <Standby Compartment ID>
   display_name = <Display Name>
@@ -111,7 +113,7 @@ Create Volumes for Compute
 }
 
 resource oci_core_volume_backup_policy_assignment export_TestVol_volume_backup_policy_assignment_1 {
-  #Specify BAckup Policy
+  #Specify Backup Policy
   asset_id  = oci_core_volume.export_TestVol.id
   policy_id = "ocid1.volumebackuppolicy.oc1..aaaaaaaadrzfwjb5tflixtmy5axp2kx65uqakgnupfogabzjhtn5x5dfra6q"
 }
