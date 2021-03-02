@@ -63,7 +63,7 @@
         provider = oci.<PRIMARY REGION ALIAS NAME FROM PROVIDER FILE>       # from provider.tf
         availability_domain = <AVAILABILITY DOMAIN NAME>         
         compartment_id = var.compartment_id
-        display_name = "block_volume_group"
+        display_name = "dr_volume_group"
         source_details {
             type = "volumeIds"
             volume_ids = data.oci_core_volumes.tagged_volumes.volumes[*].id
