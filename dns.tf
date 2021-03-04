@@ -1,7 +1,7 @@
 #DNS Zone
 resource "oci_dns_zone" "dns_zone" {
     compartment_id = var.oci_compartment_id
-    name = var.zone_type
+    name = var.zone_name
     zone_type = var.zone_type
 }
 
