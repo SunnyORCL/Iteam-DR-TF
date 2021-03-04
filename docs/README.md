@@ -50,7 +50,7 @@ The following are the list of things to do to replicate your `primary` environme
 [[Go To Guide]](./fss/replicating-filestorage.md)
 
 
-### .9 Replicating Load Balancer (if these resources exist)
+### 9. Replicating Load Balancer (if these resources exist)
 [[Go To Guide]](./load_balancer/replicating-lb.md)
 
 
@@ -60,4 +60,4 @@ The following are the list of things to do to replicate your `primary` environme
 
 [[Go To Guide]](./dns/connectivity.md)
 
-### 9. Clean Up
+### 11. Clean Up
