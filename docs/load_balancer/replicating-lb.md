@@ -1,4 +1,6 @@
- Replicating Networking
+# Replicating Load Balancer
+
+[[Sample Script]](Terraform/sample_project/load_balancer.tf)
 
 ## Assumptions
 

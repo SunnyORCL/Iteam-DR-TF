@@ -1,5 +1,7 @@
 # Replicating Database
 
+[[Sample Script]](Terraform/sample_project/database.tf)
+
 ## Necessary Information
 
 ### Variables to pull from the OCI Console
@@ -7,7 +9,6 @@
 - Primary Database OCID
 - Primary Database Password
 - Primary Database Shape (can also pull from downloaded terraform code)
-
 
 ## Updates to DATABASE.TF
 

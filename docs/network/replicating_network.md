@@ -1,5 +1,7 @@
 # Replicating Networking
 
+[[Sample Script]](Terraform/sample_project/core.tf)
+
 ## Assumptions
 
 Primary Region contains a VCN with a subnet and internet connectivity. 

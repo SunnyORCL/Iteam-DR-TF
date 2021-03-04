@@ -2,6 +2,8 @@
 
 **Goal**: To back-up your Block Volumes to maintain multiple copies of data in your `primary` region as well as your `standby` region.
 
+[[Sample Script]](Terraform/sample_project/volume.tf)
+
 ## Necessary Information
 
 ### Variables to pull from the OCI Console
