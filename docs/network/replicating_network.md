@@ -1,6 +1,6 @@
 # Replicating Networking
 
-[[Sample Script]](Terraform/sample_project/core.tf)
+[[Sample Script]](/Terraform/sample_project/core.tf)
 
 ## Assumptions
 
