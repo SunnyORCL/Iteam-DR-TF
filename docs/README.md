@@ -24,7 +24,7 @@ The following are the list of things to do to replicate your `primary` environme
 ### 3. Establishing Network Connectivity
 **Goal**: To replicate `primary` network components into another region, to where the `standby` environment will be. These network components will be used by all other components including `primary` environment Load Balancers relying on networking and is therefore critical and sensitive.
 
-[[Go To Guide]](./network/replication.md)
+[[Go To Guide]](./network/replicating_network.md)
 
 ### 4. Replicating Compute Instances (if these resources exist)
 
