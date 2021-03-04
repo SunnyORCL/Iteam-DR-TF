@@ -50,8 +50,12 @@ The following are the list of things to do to replicate your `primary` environme
 [[Go To Guide]](./fss/replicating-filestorage.md)
 
 
+### .9 Replicating Load Balancer (if these resources exist)
+[[Go To Guide]](./load_balancer/replicating-lb.md)
+
+
 ## Connectivity
-### 9. Ensuring Availability with DNS (if these resources exist)
+### 10. Ensuring Availability with DNS (if these resources exist)
 **Goal**: Use DNS steering management to redirect client traffic to the current production region after a failover.
 
 [[Go To Guide]](./dns/connectivity.md)
