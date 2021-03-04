@@ -88,39 +88,11 @@ resource oci_load_balancer_listener lb-listener-1 {
   protocol = "HTTP"
 }
 
-# resource oci_core_instance terraform_test_1 {
-#   availability_config {
-#     recovery_action = "RESTORE_INSTANCE"
-#   }
-#   availability_domain = data.oci_identity_availability_domain.export_rLid-EU-FRANKFURT-1-AD-1.name    # TO DO
-#   compartment_id      = var.compartment_ocid
-#   create_vnic_details {
-#     assign_public_ip = "true"
-#     display_name = "terraform_test_1"
-#     hostname_label = "terraform-test-1"
-#     # private_ip             = "10.1.0.3"     # TO DO????
-#     subnet_id              = oci_core_subnet.standbysubnet1.id        # TO DO
-#   }
-#   display_name = "terraform_test_1"
-#   shape = "VM.Standard.E3.Flex"
-#   shape_config {
-#     memory_in_gbs = "16"
-#     ocpus         = "1"
-#   }
-#   source_details {
-#     # source_id   = var.export_terraform_test_source_image_id
-#     # source_id = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa2i6eutldpwuvj3a57jnfmm7gwtsi72patzllqy2ncaft3zopkbka"
-#     source_id = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaag2fam5xawz7t3ad5u3mzxdhglxeldohlijdsjfaielqluysrc3ga"
-#     source_type = "image"
-#   }
-# #state = "RUNNING"       # TO DO????
-# }
-
 resource oci_load_balancer_backend backend1 {
   backendset_name  = oci_load_balancer_backend_set.bs_lb_1.name
   backup           = "false"
   drain            = "false"
-  #ip_address       = oci_core_instance.terraform_test_1.private_ip
+  #ip_address       = oci_core_instance.<INSTANCE RESOURCE NAME>.private_ip
   ip_address       = "10.1.0.4"
   load_balancer_id = oci_load_balancer_load_balancer.dr-lb-tf.id
   offline          = "false"

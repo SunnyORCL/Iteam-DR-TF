@@ -29,10 +29,10 @@ resource oci_core_volume_backup_policy block_backup_policy {
 data "oci_core_volumes" "tagged_volumes" {
     provider = oci.sanjose
     compartment_id = var.compartment_id
-    # filter {
-    #   name = "freeform_tags.environment"          
-    #   values = ["dev"]
-    # }
+    filter {
+      name = "freeform_tags.environment"          
+      values = ["dev"]
+    }
 }
 
 resource oci_core_volume_group block_volume_group {
