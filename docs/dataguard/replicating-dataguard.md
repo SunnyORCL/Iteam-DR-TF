@@ -1,6 +1,6 @@
 # Replicating Database
 
-[[Sample Script]](Terraform/sample_project/database.tf)
+[[Sample Script]](/Terraform/sample_project/database.tf)
 
 ## Necessary Information
 
