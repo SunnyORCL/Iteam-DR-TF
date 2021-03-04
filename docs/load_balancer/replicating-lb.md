@@ -41,7 +41,6 @@ Primary Region contains a VCN with 2 subnets and internet connectivity. One of t
 
 1. Update Backend Server's ip_address to use the new compute instance spun up.
 
-Note: This section is currently failing :'(
 resource oci_load_balancer_backend backend1 {
     ip_address = oci_core_instance.<COMPUTE RESOURCE NAME>.private_ip
     ...
