@@ -63,7 +63,7 @@
 
     resource oci_core_volume_group block_volume_group {
         provider = oci.<PRIMARY REGION ALIAS NAME FROM PROVIDER FILE>       # from provider.tf
-        availability_domain = <AVAILABILITY DOMAIN NAME>         
+        availability_domain = <PRIMARY REGION AVAILABILITY DOMAIN NAME>         
         compartment_id = var.compartment_id
         display_name = "dr_volume_group"
         source_details {
