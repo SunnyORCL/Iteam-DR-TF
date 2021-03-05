@@ -8,8 +8,8 @@ Primary Region contains a VCN with 2 subnets and internet connectivity. One of t
 
 ## Prerequisites 
 
-- Load Balancer Networking has already been created.
-- Compute Instance has already been created. 
+- Load Balancer Networking has already been created [here](/docs/network/replicating_network.md#updates-for-load-balancer).
+- Compute Instance has already been created [here](/docs/compute/compute.md#instancetf). 
 
 ## Updates to LOAD_BALANCER.TF
 
