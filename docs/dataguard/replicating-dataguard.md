@@ -12,7 +12,7 @@
 
 ## Prerequisites 
 
-- Database Networking has already been created.
+- Database Networking has already been created [here](/docs/network/replicating_network.md#updates-for-database--remote-peering-connection).
 
 ## Updates to DATABASE.TF
 
