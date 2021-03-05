@@ -10,6 +10,10 @@
 - Primary Database Password
 - Primary Database Shape (can also pull from downloaded terraform code)
 
+## Prerequisites 
+
+- Database Networking has already been created.
+
 ## Updates to DATABASE.TF
 
 1. Comment out resource oci_database_db_system. Some values will be used to ensure backup DB has the same configuration as the Primary DB..
