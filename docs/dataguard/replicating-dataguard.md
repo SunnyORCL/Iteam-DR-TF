@@ -1,5 +1,7 @@
 # Replicating Database
 
+[[Sample Script]](/Terraform/sample_project/database.tf)
+
 ## Necessary Information
 
 ### Variables to pull from the OCI Console
@@ -8,6 +10,9 @@
 - Primary Database Password
 - Primary Database Shape (can also pull from downloaded terraform code)
 
+## Prerequisites 
+
+- Database Networking has already been created [here](/docs/network/replicating_network.md#updates-for-database--remote-peering-connection).
 
 ## Updates to DATABASE.TF
 

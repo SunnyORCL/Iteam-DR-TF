@@ -2,6 +2,8 @@
 
 **Goal**: To back-up your Block Volumes to maintain multiple copies of data in your `primary` region as well as your `standby` region.
 
+[[Sample Script]](/Terraform/sample_project/volume.tf)
+
 ## Necessary Information
 
 ### Variables to pull from the OCI Console
@@ -63,7 +65,7 @@
 
     resource oci_core_volume_group block_volume_group {
         provider = oci.<PRIMARY REGION ALIAS NAME FROM PROVIDER FILE>       # from provider.tf
-        availability_domain = <AVAILABILITY DOMAIN NAME>         
+        availability_domain = <PRIMARY REGION AVAILABILITY DOMAIN NAME>         
         compartment_id = var.compartment_id
         display_name = "dr_volume_group"
         source_details {

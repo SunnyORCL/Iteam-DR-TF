@@ -1,8 +1,14 @@
 # Replicating Networking
 
+[[Sample Script]](/Terraform/sample_project/core.tf)
+
 ## Assumptions
 
-Primary Region contains a VCN with a subnet and internet connectivity. 
+Primary Region contains a VCN with a subnet and internet connectivity. The subnet contains a default security list.  
+
+If there is a database, Primary Region contains a database residing in the subnet with an additional database specific subnet.
+
+If there is a load balancer, the VCN contains an additional subnet. One of the subnets contains a compute instance that will act as a backend server. The other subnet contains a load balancer and a load balancer specific security list allowing communication with the backend server. 
 
 ## Necessary Information
 
@@ -16,6 +22,7 @@ Primary Region contains a VCN with a subnet and internet connectivity.
 
 - Standby VCN CIDR (Note: has to be non-overlapping to Primary Region VCN to allow for Peering)
 - Standby Subnet CIDR 
+- Load Balancer Subnet CIDR (if Load Balancer present)
 
 
 ## Updates to AVAILABILITY_DOMAIN.TF
@@ -185,12 +192,36 @@ data oci_identity_availability_domain export_rLid-<STANDBY REGION NAME>-AD-1 {
 
 If creating a remote peering connection, then need to make sure that the Primary region has the appropriate route rule before moving to next section. We will make this change from the OCI Console but first need the DRG to be created.
 
-1. Comment out all of the other sections, then Run the current terraform project.
+        1. Comment out all of the other sections, then Run the current terraform project.
 
-2. Add rule in Primary Region's Default Route table where traffic to destination `STANDBY VCN CIDR` is routed to the `PRIMARY DRG`.
+        2. Add rule in Primary Region's Default Route table where traffic to destination `STANDBY VCN CIDR` is routed to the `PRIMARY DRG`.
 
-3. Create a Database Security List in the Primary Region to allow DB connections and communication with Standby DB's Subnet. Assign to Primary DB's Subnet.
+        3. Create a Database Security List in the Primary Region to allow DB connections and communication with Standby DB's Subnet. Assign to Primary DB's Subnet.
 
-    Stateless: No;  Source: <STANDBY SUBNET CIDR>;  IP Protocol: All Protocols
-    
-    Stateless: No;  Source : 0.0.0.0/0; IP Protocol: TCP;  Destination Port Range: 1521
+            Stateless: No;  Source: <STANDBY SUBNET CIDR>;  IP Protocol: All Protocols
+            
+            Stateless: No;  Source : 0.0.0.0/0; IP Protocol: TCP;  Destination Port Range: 1521
+
+
+### Updates for Load Balancer
+
+8. Update Load Balancer security list's egress rule to send traffic to the compute instance's subnet.
+    ```
+    resource oci_core_security_list LB-Security-List {
+        ...
+        egress_security_rules {
+            destination      = <STANDBY SUBNET'S CIDR>
+            ...
+        }
+    }
+    ```
+
+9. Update Load Balancer's Subnet CIDR to one in the standby region's VCN. Additionally, change variable dns_label to a unique value.
+    ```
+    resource oci_core_subnet lbSubnet {
+        cidr_block     = "<LB SUBNET CIDR>"
+        ...
+        dns_label      = "<UNIQUE VALUE>"
+        
+    }
+    ```

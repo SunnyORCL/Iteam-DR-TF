@@ -24,7 +24,7 @@ The following are the list of things to do to replicate your `primary` environme
 ### 3. Establishing Network Connectivity
 **Goal**: To replicate `primary` network components into another region, to where the `standby` environment will be. These network components will be used by all other components including `primary` environment Load Balancers relying on networking and is therefore critical and sensitive.
 
-[[Go To Guide]](./network/replication.md)
+[[Go To Guide]](./network/replicating_network.md)
 
 ### 4. Replicating Compute Instances (if these resources exist)
 
@@ -50,10 +50,14 @@ The following are the list of things to do to replicate your `primary` environme
 [[Go To Guide]](./fss/replicating-filestorage.md)
 
 
+### 9. Replicating Load Balancer (if these resources exist)
+[[Go To Guide]](./load_balancer/replicating-lb.md)
+
+
 ## Connectivity
-### 9. Ensuring Availability with DNS (if these resources exist)
+### 10. Ensuring Availability with DNS (if these resources exist)
 **Goal**: Use DNS steering management to redirect client traffic to the current production region after a failover.
 
 [[Go To Guide]](./dns/connectivity.md)
 
-### 9. Clean Up
+### 11. Clean Up
