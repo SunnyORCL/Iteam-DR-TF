@@ -17,7 +17,7 @@ Because Object Storage is a regional service, you must authorize the Object Stor
     * > Allow group <my_group> to manage object-family in tenancy
     * > Allow service objectstorage-us-phoenix-1 to manage object-family in tenancy
 2. Take note of the following necessary information:
-    * the `Primary` buckets' name (we'll refer to as <PRIMARY_BUCKET_NAME> in this guide)
+    * <PRIMARY_BUCKET_NAME> - the `Primary` buckets' name 
 
 
 ## Steps
