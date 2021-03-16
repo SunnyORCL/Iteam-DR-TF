@@ -85,7 +85,8 @@ resource oci_core_instance < Instance Name > {
 
 ```
 
-###Customizations (with public IP)
+
+### Customizations (with public IP)
 
 
 ```resource "oci_core_instance" "generated_oci_core_instance" {
