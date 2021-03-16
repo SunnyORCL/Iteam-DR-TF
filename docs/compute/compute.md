@@ -85,12 +85,10 @@ resource oci_core_instance < Instance Name > {
 
 ```
 
-###Customizations
+###Customizations (with public IP)
 
-'''
-provider "oci" {}
 
-resource "oci_core_instance" "generated_oci_core_instance" {
+```resource "oci_core_instance" "generated_oci_core_instance" {
 	agent_config {
     
         #specify if management service should be disabled
@@ -158,4 +156,4 @@ resource "oci_core_instance" "generated_oci_core_instance" {
 	}
 }
 
-'''
+```
