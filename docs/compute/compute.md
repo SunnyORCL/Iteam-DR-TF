@@ -84,3 +84,78 @@ resource oci_core_instance < Instance Name > {
 }
 
 ```
+
+###Customizations
+
+'''
+provider "oci" {}
+
+resource "oci_core_instance" "generated_oci_core_instance" {
+	agent_config {
+    
+        #specify if management service should be disabled
+		is_management_disabled = "false"
+        
+        #specify if monitoring service should be disabled
+		is_monitoring_disabled = "false"
+        
+        #specify plugins for instance
+        #can have multiple plugins
+		plugins_config {
+			desired_state = "ENABLED"
+			name = "OS Management Service Agent"
+		}
+		plugins_config {
+			desired_state = "ENABLED"
+			name = "Custom Logs Monitoring"
+		}
+		plugins_config {
+			desired_state = "ENABLED"
+			name = "Compute Instance Run Command"
+		}
+		plugins_config {
+			desired_state = "ENABLED"
+			name = "Compute Instance Monitoring"
+		}
+	}
+	availability_config {
+		recovery_action = "RESTORE_INSTANCE"
+	}
+    
+	availability_domain = < Standby Availability Domain >
+	compartment_id = < Standby Compartment ID >
+	create_vnic_details {
+        #enable and specify a public IP address
+		assign_public_ip = "true"
+		subnet_id = < Public Subnet ID >
+	}
+    
+    #tags can be used to organize resources
+	defined_tags = {
+		< namespace >. < tag > = < key >
+	}
+    
+    #specify the display name of your instance
+	display_name = "terraformOptions"
+	
+	shape = < Instance Shape >
+    
+    #Customize the specs of your instance
+	shape_config {
+    
+        #specify memory
+		memory_in_gbs = "16"
+        
+        #specify OCPU count
+		ocpus = "1"
+	}
+    
+    #this is the image which will be used to create the instance
+	source_details {
+		source_id = < Source Image
+        for Instance >
+		source_type = "image"
+	}
+}
+
+'''
