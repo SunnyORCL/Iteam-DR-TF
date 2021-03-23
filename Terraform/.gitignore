@@ -3,3 +3,4 @@
 *.tfvars
 .terraform
 *.backup
+*.pem
