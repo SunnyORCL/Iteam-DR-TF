@@ -47,7 +47,6 @@ resource oci_load_balancer_backend backend {
   backup           = "false"
   drain            = "false"
   ip_address       = oci_core_instance.compute_1.private_ip
-  # ip_address       = "10.1.0.3"
   load_balancer_id = oci_load_balancer_load_balancer.standby_lb.id
   offline          = "false"
   port             = "80"
