@@ -20,10 +20,6 @@ resource oci_core_instance app_instance {
     source_id = oci_core_boot_volume.restored_boot_volume.id
     source_type = "bootVolume"
   }
-  # source_details {
-  #   source_id = var.compute_image_id
-  #   source_type = "image"
-  # }
 }
 
 resource "oci_core_boot_volume_backup" "initial_boot_volume_backup" {
@@ -89,42 +85,3 @@ resource "null_resource" SETUP_APP_BY_SSH {
       ]
     }
 }
-
-
-# If created by image instead of boot volume
-
-# resource "null_resource" SETUP_COMPUTE_BY_SSH {
-#     depends_on = [oci_core_instance.app_instance]
-#     connection {
-#     type     = "ssh"
-#     user     = "opc"
-#     private_key = file(var.compute_ssh_private_key)
-#     host     = oci_core_instance.app_instance.public_ip
-#   }
-#     provisioner "remote-exec" {
-#       inline = [
-#         "sudo yum install docker-engine -y",
-#         "sudo yum install git-all -y",
-#         "sudo systemctl start docker",
-#         "sudo usermod -aG docker opc"
-#       ]
-#     }
-# }
-# resource "null_resource" SETUP_APP_BY_SSH {
-#     depends_on = [oci_core_instance.app_instance, null_resource.SETUP_COMPUTE_BY_SSH]
-#     connection {
-#     type     = "ssh"
-#     user     = "opc"
-#     private_key = file(var.compute_ssh_private_key)
-#     host     = oci_core_instance.app_instance.public_ip
-#   }
-#     provisioner "remote-exec" {
-#       inline = [
-#         "rm -rf oracle.r2r.simple-app",
-#         "git clone https://github.com/naberin/oracle.r2r.simple-app.git && cd oracle.r2r.simple-app",
-#         "docker build -t simpleapp:latest .",
-#         "docker run -d -p 80:3000 simpleapp"
-#       ]
-#     }
-# }
-
