@@ -17,8 +17,11 @@
 ```
 **./Terraform** - Terraform (Infrastructure as Code) code
 ```
-/basic_script/ - basic terraform code for a limited scope
+/basic_script/ - full terraform script for a limited scope
+
+/workshop_1/ - terraform workshop part 1: creating network and compute in dr region
 
 /infrastructure/ - code as reusable, scalable modules
+
 
 ```
