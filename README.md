@@ -16,3 +16,9 @@
     - replicating-volume.md
 ```
 **./Terraform** - Terraform (Infrastructure as Code) code
+```
+/basic_script/ - basic terraform code for a limited scope
+
+/infrastructure/ - code as reusable, scalable modules
+
+```
