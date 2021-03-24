@@ -16,7 +16,9 @@ This script takes a primary region with a VCN + Subnets, App Server + tagged Blo
     - Create DRG
     - Attach to VCN and add rule to route table
     - Add following rules to Security List to allow DB connections and communication with Standby DB's Subnet for DataGuard.
+            
             Stateless: No;  Source : 0.0.0.0/0; IP Protocol: TCP;  Destination Port Range: 1521
+            
             Stateless: No;  Source: <STANDBY SUBNET CIDR>;  IP Protocol: All Protocols
             
 
