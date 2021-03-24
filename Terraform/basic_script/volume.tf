@@ -1,8 +1,3 @@
-# /* This script creates a backup policy, filters block volumes by tag, and then provides two methods of applying the policy to all tagged volumes: 
-# (1) creating a volume group out of the tagged volumes and applying the policy to the group or (2) assigning the policy to each individual volume.
-# */
-
-
 # Create Volume Group
 
 data "oci_core_volumes" "tagged_volumes" {
