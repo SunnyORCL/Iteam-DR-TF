@@ -1,3 +1,6 @@
+/* Creates volume group based on block volume tags and then assigns them a backup policy to the standby region. */
+
+
 # Create Volume Group
 
 data "oci_core_volumes" "tagged_volumes" {
@@ -28,25 +31,23 @@ resource oci_core_volume_group block_volume_group {
 }
 
 
+# CUSTOM POLICY:
 
-
-# # CUSTOM POLICY:
-
-# # resource oci_core_volume_backup_policy block_backup_policy {
-# #   provider = oci.primary_region
-# #   compartment_id = var.compartment_ocid
-# #   destination_region = var.standby_region
-# #   display_name = var.block_backup_policy_display_name
-# #   schedules {
-# #     backup_type       = "FULL"
-# #     day_of_month      = "1"
-# #     day_of_week       = "MONDAY"
-# #     hour_of_day       = "0"
-# #     month             = "JANUARY"
-# #     offset_seconds    = "0"
-# #     offset_type       = "STRUCTURED"
-# #     period            = "ONE_MONTH"
-# #     retention_seconds = "2678400"
-# #     time_zone         = "UTC"
-# #   }
-# # }
+# resource oci_core_volume_backup_policy block_backup_policy {
+#   provider = oci.primary_region
+#   compartment_id = var.compartment_ocid
+#   destination_region = var.standby_region
+#   display_name = var.block_backup_policy_display_name
+#   schedules {
+#     backup_type       = "FULL"
+#     day_of_month      = "1"
+#     day_of_week       = "MONDAY"
+#     hour_of_day       = "0"
+#     month             = "JANUARY"
+#     offset_seconds    = "0"
+#     offset_type       = "STRUCTURED"
+#     period            = "ONE_MONTH"
+#     retention_seconds = "2678400"
+#     time_zone         = "UTC"
+#   }
+# }

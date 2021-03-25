@@ -1,4 +1,8 @@
-# TO DO: MAKE SECURITY LIST DYNAMIC
+/* Creates networking components for the standby environment: VCN, Subnets for App Server/Load Balancer/DB + corresponding security Lists, 
+Internet Gateway, Remote Peering Connection, Route table, DHCP Options. */
+
+
+# BASIC COMPONENTS (will host app server)
 
 resource oci_core_vcn standbyVCN {
   cidr_blocks = [
@@ -9,7 +13,7 @@ resource oci_core_vcn standbyVCN {
   dns_label    = var.vcn_dns
 }
 
-resource oci_core_subnet standbySubnet1 {
+resource oci_core_subnet appSubnet1 {
   cidr_block     = var.subnet_cidr
   compartment_id = var.compartment_ocid
   dhcp_options_id = oci_core_vcn.standbyVCN.default_dhcp_options_id
@@ -21,7 +25,6 @@ resource oci_core_subnet standbySubnet1 {
   route_table_id             = oci_core_vcn.standbyVCN.default_route_table_id
   security_list_ids = [
     oci_core_vcn.standbyVCN.default_security_list_id,
-    oci_core_security_list.DB-Security-List.id
   ]
   vcn_id = oci_core_vcn.standbyVCN.id
 }
@@ -103,6 +106,17 @@ resource oci_core_default_security_list default-security-list-for-standbyVCN {
     source_type = "CIDR_BLOCK"
     stateless   = "false"
   }
+  ingress_security_rules {
+    description = "access sample app"
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "80"
+      min = "80"
+    }
+  }
   manage_default_resource_id = oci_core_vcn.standbyVCN.default_security_list_id
 }
 
@@ -113,79 +127,22 @@ resource oci_core_internet_gateway standbyInternetGW {
   vcn_id = oci_core_vcn.standbyVCN.id
 }
 
-# REMOTE PEERING GATEWAY
-
-# # TO DO: DECIDE IF WE NEED TO DO THE DRG PART HERE?
-# resource oci_core_drg primary_region_drg {
-#   provider = oci.primary_region
-#   compartment_id = var.compartment_ocid
-#   display_name = var.primary_drg_display_name
-# }
-
-# resource oci_core_drg_attachment primary_region_drg_attachment {
-#   provider = oci.primary_region
-#   drg_id = oci_core_drg.primary_region_drg.id
-#   vcn_id = var.primary_vcn_ocid
-# }
-
-
-resource oci_core_drg standby_region_drg {
-  compartment_id = var.compartment_ocid
-  display_name = var.standby_drg_display_name
-}
-
-resource oci_core_drg_attachment standby_region_drg_attachment {
-  drg_id = oci_core_drg.standby_region_drg.id
-  vcn_id = oci_core_vcn.standbyVCN.id
-}
-
-# Create Primary RPC
-resource oci_core_remote_peering_connection primary_rpc {
-  provider = oci.primary_region
-  compartment_id = var.compartment_ocid
-  #drg_id = oci_core_drg.primary_region_drg.id
-  drg_id = var.primary_drg_ocid
-  display_name = var.primary_rpc_display_name
-}
-
-# Create Standby RPC and Connect the RPCs
-resource oci_core_remote_peering_connection standby_rpc {
-  compartment_id = var.compartment_ocid
-  drg_id = oci_core_drg.standby_region_drg.id
-  display_name = var.standby_rpc_display_name
-  
-  peer_id = oci_core_remote_peering_connection.primary_rpc.id
-  peer_region_name = var.primary_region
-}
-
-
-# DB SPECIFIC NETWORKING
-
-resource oci_core_security_list DB-Security-List {
-  compartment_id = var.compartment_ocid
-  display_name = var.db_security_list_display_name
-  ingress_security_rules {
-    description = "For Standby Peering"
-    protocol    = "all"
-    source      = var.primary_vcn_cidr
-    source_type = "CIDR_BLOCK"
-    stateless   = "false"
-  }
-  ingress_security_rules {
-    description = "Connecting to DB"
-    protocol    = "6"
-    source      = "0.0.0.0/0"
-    source_type = "CIDR_BLOCK"
-    stateless   = "false"
-    tcp_options {
-      max = "1521"
-      min = "1521"
-    }
-  }
-  vcn_id = oci_core_vcn.standbyVCN.id
-}
 
 # LOAD BALANCER SPECIFIC NETWORKING
+
+resource oci_core_subnet lbSubnet1 {
+  cidr_block     = var.lb_subnet_cidr
+  compartment_id = var.compartment_ocid
+  dhcp_options_id = oci_core_vcn.standbyVCN.default_dhcp_options_id
+  display_name    = var.lb_subnet_display_name
+  dns_label       = var.lb_subnet_dns
+  prohibit_public_ip_on_vnic = "false"
+  route_table_id             = oci_core_vcn.standbyVCN.default_route_table_id
+  security_list_ids = [
+    oci_core_security_list.LB-security-list.id,
+  ]
+  vcn_id = oci_core_vcn.standbyVCN.id
+}
 
 resource oci_core_security_list LB-security-list {
   compartment_id = var.compartment_ocid
@@ -213,16 +170,78 @@ resource oci_core_security_list LB-security-list {
   vcn_id = oci_core_vcn.standbyVCN.id
 }
 
-resource oci_core_subnet lbSubnet1 {
-  cidr_block     = var.lb_subnet_cidr
+
+# DB SPECIFIC NETWORKING
+
+resource oci_core_subnet dbSubnet1 {
+  cidr_block     = var.subnet_cidr
   compartment_id = var.compartment_ocid
   dhcp_options_id = oci_core_vcn.standbyVCN.default_dhcp_options_id
-  display_name    = var.lb_subnet_display_name
-  dns_label       = var.lb_subnet_dns
+  display_name    = var.subnet_display_name
+  dns_label       = var.subnet_dns
+  freeform_tags = {
+  }
   prohibit_public_ip_on_vnic = "false"
   route_table_id             = oci_core_vcn.standbyVCN.default_route_table_id
   security_list_ids = [
-    oci_core_security_list.LB-security-list.id,
+    oci_core_security_list.DB-Security-List.id,
   ]
   vcn_id = oci_core_vcn.standbyVCN.id
 }
+
+resource oci_core_security_list DB-Security-List {
+  compartment_id = var.compartment_ocid
+  display_name = var.db_security_list_display_name
+  ingress_security_rules {
+    description = "For Standby Peering"
+    protocol    = "all"
+    source      = var.primary_vcn_cidr
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+  }
+  ingress_security_rules {
+    description = "Connecting to DB"
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "1521"
+      min = "1521"
+    }
+  }
+  vcn_id = oci_core_vcn.standbyVCN.id
+}
+
+
+
+# REMOTE PEERING GATEWAY
+
+resource oci_core_drg standby_region_drg {
+  compartment_id = var.compartment_ocid
+  display_name = var.standby_drg_display_name
+}
+
+resource oci_core_drg_attachment standby_region_drg_attachment {
+  drg_id = oci_core_drg.standby_region_drg.id
+  vcn_id = oci_core_vcn.standbyVCN.id
+}
+
+# Create Primary RPC
+resource oci_core_remote_peering_connection primary_rpc {
+  provider = oci.primary_region
+  compartment_id = var.compartment_ocid
+  drg_id = var.primary_drg_ocid
+  display_name = var.primary_rpc_display_name
+}
+
+# Create Standby RPC and Connect the RPCs
+resource oci_core_remote_peering_connection standby_rpc {
+  compartment_id = var.compartment_ocid
+  drg_id = oci_core_drg.standby_region_drg.id
+  display_name = var.standby_rpc_display_name
+  
+  peer_id = oci_core_remote_peering_connection.primary_rpc.id
+  peer_region_name = var.primary_region
+}
+

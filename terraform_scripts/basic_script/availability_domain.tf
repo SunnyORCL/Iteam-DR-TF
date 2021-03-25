@@ -1,6 +1,5 @@
-# TO DO: CHANGE NUMBER OF AVAILABILITY DOMAINS BASED ON REGION
+/* This script initializes availability domain data sources to be used throughout modules. */
 
-# CHANGE TO USING REGEX TO ACCESS ALL ADs WITH ONE DATA SOURCE
 
 data oci_identity_availability_domain AD-1 {
   compartment_id = var.compartment_ocid

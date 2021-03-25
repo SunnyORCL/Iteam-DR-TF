@@ -1,4 +1,10 @@
+/* This script creates backup of the boot volume from the primary region's app server, copies it to the standby region, 
+and spins up an instance from the boot volume. Once app server is intialized, runs additional scripts from the compute to finish application set-up. */
 
+
+# INITIALIZE APP SERVER
+
+# create instance from boot volume
 resource oci_core_instance app_instance {
   metadata = {
     ssh_authorized_keys = file(var.compute_ssh_pub_key)
@@ -12,7 +18,7 @@ resource oci_core_instance app_instance {
     assign_public_ip = "true"
     display_name = var.compute_vnic_display_name
     hostname_label = var.compute_hostname
-    subnet_id  = oci_core_subnet.standbySubnet1.id 
+    subnet_id  = oci_core_subnet.appSubnet1.id 
   }
   display_name = var.compute_display_name
   shape = var.compute_shape
@@ -22,12 +28,14 @@ resource oci_core_instance app_instance {
   }
 }
 
+# backup boot volume within primary region
 resource "oci_core_boot_volume_backup" "initial_boot_volume_backup" {
     provider = oci.primary_region
     display_name = var.boot_volume_backup_display_name
     boot_volume_id = var.primary_boot_volume_ocid
 }
 
+# copy boot volume backup to standby region
 resource "oci_core_boot_volume_backup" "boot_volume_backup_cross_regional" {
     display_name = var.boot_volume_backup_display_name
     source_details {
@@ -36,23 +44,19 @@ resource "oci_core_boot_volume_backup" "boot_volume_backup_cross_regional" {
     }
 }
 
+# restore backup to boot volume
 resource "oci_core_boot_volume" "restored_boot_volume" {
-    #Required
     availability_domain = data.oci_identity_availability_domain.AD-1.name
     compartment_id = var.compartment_ocid
     source_details {
-        #Required
         id = oci_core_boot_volume_backup.boot_volume_backup_cross_regional.id
         type = "bootVolumeBackup"
     }
     display_name = var.restored_boot_volume_display_name
-    # is_auto_tune_enabled = var.boot_volume_is_auto_tune_enabled
-    # kms_key_id = oci_kms_key.test_key.id
-    # size_in_gbs = var.boot_volume_size_in_gbs
-    # vpus_per_gb = var.boot_volume_vpus_per_gb
 }
 
-# Set-Up Application
+
+# SET-UP APPLICATION
 
 resource "null_resource" SETUP_COMPUTE_BY_SSH {
     depends_on = [oci_core_instance.app_instance]

@@ -1,3 +1,4 @@
+/* Create dataguard association for primary region DB to standby region. */
 
 resource oci_database_data_guard_association vm_db_data_guard_association {
   provider = oci.primary_region
@@ -11,12 +12,10 @@ resource oci_database_data_guard_association vm_db_data_guard_association {
   display_name = var.standby_db_display_name
   shape  = var.primary_db_vm_shape
   availability_domain = data.oci_identity_availability_domain.AD-1.name
-  subnet_id = oci_core_subnet.standbySubnet1.id
+  subnet_id = oci_core_subnet.dbSubnet1.id
   hostname = var.standby_db_hostname
 
   depends_on = [
     oci_core_remote_peering_connection.standby_rpc,   # need to create peering VCNs
   ]
 }
-
-# TO DO: CREATE METHOD FOR NON-VM DBS

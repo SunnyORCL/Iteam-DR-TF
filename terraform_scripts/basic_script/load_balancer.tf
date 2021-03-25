@@ -1,3 +1,4 @@
+/* Creates a load balancer with the new app server as a backend. */
 
 resource oci_load_balancer_load_balancer standby_lb {
   compartment_id = var.compartment_ocid
