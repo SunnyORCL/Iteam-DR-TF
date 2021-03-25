@@ -13,7 +13,7 @@ Assumes you have a basic set-up of a VCN, Compute, Primary DB, Object Storage, a
 
 ## terraform_scripts
 
-**Method 2:** Providing vasic terraform scripts for customers to utilize.
+**Method 2:** Providing basic terraform scripts for customers to utilize.
 
 This section includes two folders:
 
