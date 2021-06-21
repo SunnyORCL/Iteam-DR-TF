@@ -62,3 +62,8 @@ provider oci {
 1. In the following sections, remove "Defined Tags" field exported with each resource, if present. They have been automatically marked with the time the resource was created which will not be accurate for the standby environment.
 
 2. Change Resource Names and Display Names. This is optional. If you choose to change the resource names, be sure to change them throughout the files since the resources often refer to each other.
+
+
+    
+## Next Step 
+[Replicating Networking](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/network/replicating_network.md)
