@@ -154,3 +154,6 @@ For each Object Storage **object** resource that appears in your `object_storage
             object = <OBJECT_NAME>
         }
     ```
+    
+## Next Step 
+[Replicating File Storage](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/fss/replicating-filestorage.md) 
