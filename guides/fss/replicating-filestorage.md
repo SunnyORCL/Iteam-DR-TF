@@ -87,7 +87,7 @@ variable "max_fs_files"{default = 223442} /* Update the tffiles, ffiles and afil
 variable "snapshot_name"{default = "<Snapshot_Name>"}
 ```
 
-#### DATA.TF
+#### 4. DATA.TF
 
 If required, change the availability domain number based on the subscribed standby region. New regions will only have one availability domain. 
 
