@@ -38,5 +38,5 @@
     ![img](./resources/downloadConfiguration.PNG)
     
     
-
-##[Next Step](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/replication_prep/terraform_prep.md)
+## Next Step 
+[Terraform Prep](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/replication_prep/terraform_prep.md)
