@@ -45,7 +45,7 @@
 
       2. You can go into the OCI console and find the OCIDs of all the block volumes to be backed up. This will be the best solution if only a subset of the volumes need to be backed up or cannot be easily filtered. 
 
-    If you choose to use solution one, add the data source below to your code. If backing up ALL the blocked volumes in the compartment and not using the tags, remove the filter block within the code.
+    If you choose to use solution one, add the data source below to your code. If backing up ALL the block volumes in the compartment and not using the tags, remove the filter block within the code.
     ```
     data "oci_core_volumes" "tagged_volumes" {
         provider = oci.<PRIMARY REGION ALIAS NAME FROM PROVIDER FILE>       # from provider.tf
