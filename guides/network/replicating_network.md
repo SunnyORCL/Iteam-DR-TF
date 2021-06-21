@@ -225,3 +225,6 @@ If creating a remote peering connection, then need to make sure that the Primary
         
     }
     ```
+    
+ ## Next Step 
+[Replicating Compute](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/compute/compute.md) 
