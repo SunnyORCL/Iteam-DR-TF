@@ -39,4 +39,4 @@
     
     
 
-[[Next Step]](https://github.com/SunnyORCL/Iteam-DR-TF/main/guides/replication_prep/terraform_prep.md)
+[[Next Step]](https://github.com/SunnyORCL/Iteam-DR-TF/main/blob/guides/replication_prep/terraform_prep.md)
