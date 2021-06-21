@@ -79,3 +79,7 @@
 
 
 4. Clean-up CORE.TF - Remove any Volume resources blocks (Block Volumes, Policies, Volume Groups) defined automatically by the primary region terraform output. All we will need is the backup and on failure, we will provision the backup to a Block Volume.
+
+
+ ## Next Step 
+[Replicating Database](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/dataguard/replicating-dataguard.md) 
