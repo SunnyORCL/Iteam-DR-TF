@@ -177,3 +177,7 @@ resource "oci_file_storage_export_set" "exps_1" {
   max_fs_stat_files = var.max_fs_files
 }
 ```
+
+
+## Next Step 
+[Replicating Load Balancer](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/load_balancer/replicating-lb.md]
