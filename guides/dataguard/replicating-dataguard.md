@@ -51,3 +51,5 @@ data "oci_database_db_homes" "db_homes_standby" {
   db_system_id   = oci_database_db_system.<STANDBY DB RESOURCE NAME>.id
 }
 ```
+ ## Next Step 
+[Replicating Object Storage](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/object_storage/replication.md) 
