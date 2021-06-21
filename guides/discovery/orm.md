@@ -36,3 +36,7 @@
 4. Finally, under `Stack Information`, download the Terraform Configuration File and unzip to your preferred development environment.
 
     ![img](./resources/downloadConfiguration.PNG)
+    
+    
+
+[[Next Step]](./replication_prep/terraform_prep.md)
