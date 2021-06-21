@@ -30,7 +30,7 @@ The following are the list of things to do to replicate your `primary` environme
 
 [[Go To Guide]](./compute/compute.md)
 
-### 5. Replicating Volumes (if these resources exist)
+### 5. Replicating Block Volumes (if these resources exist)
 **Goal**: To back-up your Block Volumes to maintain multiple copies of data in your `primary` region as well as your `standby` region.
 
 [[Go To Guide]](./volume/volume_backup.md)
