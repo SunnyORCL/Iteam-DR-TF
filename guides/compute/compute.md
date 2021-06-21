@@ -158,3 +158,6 @@ resource oci_core_instance < Instance Name > {
 }
 
 ```
+
+ ## Next Step 
+[Replicating Block Volumes](https://github.com/SunnyORCL/Iteam-DR-TF/blob/main/guides/volume/volume_backup.md) 
